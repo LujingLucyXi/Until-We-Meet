@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glomere · Themed Gatherings at Curated Locations</title>
+<meta name="description" content="Glomere: Themed Gatherings, easy to join, at curated locations. 主题明确的小型团体聚会，办在精选的房间里。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--cream:#FAF6EA; --cream2:#F4EBD2; --ink:#17131F; --ink2:#4A4358; --mute:#7A7290;
+--gold:#F2B83B; --gold-deep:#D99A16; --pink:#DE4F7E; --pink-deep:#BE3A66;
+--blue:#2456E6; --blue-deep:#1D46C8;
+--card:#FFFFFF; --line:rgba(217,154,22,.38);
+--radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none !important}
+body{font-family:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;background:var(--cream);min-height:100vh;position:relative;overflow:hidden}
+a{color:inherit;text-decoration:none}
+.en{font-family:'Space Grotesk','Noto Sans SC',sans-serif}
+
+/* ---------- NAV ---------- */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;position:relative;z-index:5;gap:10px}
+.logo{font-family:'Baloo 2','Space Grotesk',sans-serif;font-size:30px;font-weight:800;letter-spacing:0;color:var(--ink);white-space:nowrap}
+.logo i{font-style:normal;color:var(--gold-deep)}
+nav .links{display:flex;gap:14px;align-items:center;font-size:14px;font-weight:500}
+nav .links a{color:var(--ink2);white-space:nowrap}
+nav .links a.cta{color:var(--ink);background:var(--gold);font-weight:700;padding:9px 16px;border-radius:999px}
+.langtoggle{display:flex;border:1.5px solid rgba(23,19,31,.28);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.langtoggle button{appearance:none;border:0;background:transparent;color:var(--ink2);font-family:inherit;font-size:13px;font-weight:700;padding:8px 14px;cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:var(--cream)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:36px 24px 0;z-index:2}
+.glow{position:absolute;top:-140px;right:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,184,59,.55) 0%,rgba(242,184,59,0) 65%);pointer-events:none}
+.glow2{position:absolute;top:210px;left:-160px;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(222,79,126,.28) 0%,rgba(222,79,126,0) 65%);pointer-events:none}
+.orb{position:relative;width:150px;height:150px;margin:6px auto 24px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#FFD97A 0%,#F2B83B 55%,#E0A11B 100%);
+  box-shadow:0 18px 40px rgba(217,154,22,.45), inset 0 -10px 24px rgba(180,120,10,.35);
+  border:3px solid var(--ink)}
+.orb i{position:absolute;left:50%;top:50%;border-radius:50%;border:2px solid var(--ink);animation:orbit linear infinite}
+@keyframes orbit{from{transform:rotate(0deg) translateX(var(--r))}to{transform:rotate(360deg) translateX(var(--r))}}
+@media (prefers-reduced-motion:reduce){.orb i{animation:none}}
+.orb .d1{--r:58px;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;background:radial-gradient(circle at 32% 28%,#7FA0FF 0%,#2456E6 55%,#1A3FB8 100%);animation-duration:10s;animation-delay:-2s}
+.orb .d2{--r:46px;width:24px;height:24px;margin:-12px 0 0 -12px;background:radial-gradient(circle at 32% 28%,#FF9EBE 0%,#F06A9B 55%,#D94F7A 100%);animation-duration:14s;animation-delay:-7s}
+.orb .d3{--r:32px;width:14px;height:14px;margin:-7px 0 0 -7px;background:radial-gradient(circle at 32% 28%,#FFFFFF 0%,#F4F1E8 60%,#D8D0BD 100%);animation-duration:12s;animation-direction:reverse;animation-delay:-4s}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;
+  padding:8px 15px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ink);background:#fff}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px rgba(222,79,126,.6)}
+.hero h1{font-size:54px;font-weight:900;line-height:1.18;letter-spacing:.01em;margin:26px 0 8px;color:var(--ink);position:relative}
+.hero h1 .hl{color:var(--pink-deep)}
+.hero .big-en{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:.28em;color:var(--blue-deep);margin-top:16px;text-transform:uppercase;line-height:1.7}
+.hero .big-zh{font-weight:900;font-size:19px;letter-spacing:.34em;color:var(--blue-deep);margin-top:16px}
+.hero .sub{font-size:16px;line-height:1.95;color:var(--ink2);max-width:490px;margin-top:18px;position:relative}
+.hero .sub s{text-decoration-color:var(--pink-deep);text-decoration-thickness:2px}
+.hero .tagline-big{font-size:30px;font-weight:900;line-height:1.35;color:var(--ink);margin-top:18px}
+.hero .tagline-big s{text-decoration-color:var(--pink-deep);text-decoration-thickness:2.5px}
+.hero .cta-row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;position:relative}
+.btn{display:inline-block;padding:15px 28px;border-radius:999px;font-size:15.5px;font-weight:700}
+.btn-lime{background:var(--gold);color:var(--ink)}
+.btn-ghost{border:1.5px solid rgba(23,19,31,.35);color:var(--ink)}
+.hero .mini{margin-top:18px;font-size:12.5px;color:var(--mute);letter-spacing:.06em;position:relative}
+
+/* ---------- MARQUEE ---------- */
+.marquee{margin-top:46px;background:var(--gold);color:var(--ink);transform:rotate(-1.6deg) scale(1.03);
+  padding:11px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:3}
+.marquee .track{display:inline-block;font-weight:700;font-size:15px;letter-spacing:.22em}
+.marquee .track.en{font-family:'Space Grotesk',sans-serif}
+
+/* ---------- SECTIONS ---------- */
+section{padding:52px 24px 6px;position:relative;z-index:2}
+.sec-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.30em;
+  color:var(--blue-deep);border:1px solid rgba(36,86,230,.4);padding:6px 12px;border-radius:999px}
+.sec-tag.en{font-family:'Space Grotesk',sans-serif;text-transform:uppercase}
+.sec-title{font-size:31px;font-weight:900;color:var(--ink);margin:16px 0 10px;line-height:1.3}
+.sec-sub{font-size:14.5px;color:var(--ink2);line-height:1.9;max-width:490px}
+.pillars{display:grid;gap:14px;margin-top:26px}
+.pillar{border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+.pillar .no{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.24em;opacity:.85}
+.pillar h3{font-size:22.5px;font-weight:900;margin:9px 0 8px}
+.pillar p{font-size:14px;line-height:1.9}
+.p-violet{background:linear-gradient(135deg,#F7C948,#E8A812);color:var(--ink)}
+.p-lime{background:var(--pink);color:#fff}
+.p-dark{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:0 10px 30px rgba(217,154,22,.12)}
+.p-dark p{color:var(--ink2)}
+.pillar .big{position:absolute;right:14px;bottom:-16px;font-family:'Space Grotesk',sans-serif;font-size:88px;font-weight:700;opacity:.10;line-height:1}
+
+/* ---------- HOW ---------- */
+.steps{display:grid;gap:12px;margin-top:26px}
+.step{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 30px rgba(217,154,22,.10)}
+.step .n{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;color:var(--pink-deep);line-height:1;flex:0 0 auto}
+.step h3{font-size:18.5px;font-weight:900;color:var(--ink);margin-bottom:5px}
+.step p{font-size:13.5px;color:var(--ink2);line-height:1.85}
+
+/* ---------- THEMES ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chip{border:1.5px solid rgba(23,19,31,.25);color:var(--ink);border-radius:999px;padding:11px 20px;font-size:15px;font-weight:700;background:#fff}
+.chip.hot{background:var(--pink);border-color:var(--pink);color:#fff}
+.chip.dim{color:var(--mute);border-style:dashed;background:transparent}
+.themes-note{margin-top:16px;font-size:13px;color:var(--mute);line-height:1.85}
+
+/* ---------- APPS ---------- */
+.appcards{display:grid;gap:12px;margin-top:26px}
+.appcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 30px rgba(217,154,22,.10)}
+.appcard h3{font-size:18.5px;font-weight:900;color:var(--ink);margin-bottom:5px}
+.appcard p{font-size:13.5px;color:var(--ink2);line-height:1.85}
+.appcard .go2{margin-top:10px;display:inline-block;font-size:13.5px;font-weight:900;color:var(--blue-deep)}
+
+/* ---------- EVENT CARD ---------- */
+.event-card{display:block;margin-top:26px;border-radius:26px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:0 16px 40px rgba(217,154,22,.16)}
+.event-card img{width:100%;height:240px;object-fit:cover;object-position:center 30%;display:block}
+.event-card .body{padding:24px}
+.event-card .tag{display:inline-block;background:var(--gold);color:var(--ink);font-size:11.5px;font-weight:900;letter-spacing:.10em;padding:5px 12px;border-radius:999px}
+.event-card h3{font-size:27px;font-weight:900;color:var(--ink);margin:14px 0 7px}
+.event-card p{font-size:14px;color:var(--ink2);line-height:1.9}
+.event-card .meta{margin-top:14px;font-size:13.5px;font-weight:700;color:var(--blue-deep);letter-spacing:.04em}
+.event-card .go{margin-top:18px;display:inline-block;background:var(--ink);color:var(--cream);font-size:14.5px;font-weight:900;padding:13px 26px;border-radius:999px}
+
+/* ---------- FOOTER ---------- */
+footer{margin-top:56px;padding:38px 24px 46px;border-top:1px solid var(--line);text-align:center;position:relative;z-index:2}
+footer .flogo{font-family:'Baloo 2','Space Grotesk',sans-serif;font-size:26px;font-weight:800;letter-spacing:0;color:var(--ink)}
+footer .flogo i{font-style:normal;color:var(--gold-deep)}
+footer p{font-size:12.5px;color:var(--mute);line-height:2;margin-top:12px}
+footer a{color:var(--blue-deep);font-weight:700}
+@media (max-width:520px){ html,body{overflow-x:hidden} .hero h1{font-size:41px} .sec-title{font-size:27px} nav{padding:16px 16px} nav .links a.plain{display:none} nav .links{gap:10px} .logo{font-size:26px} nav .links a.cta{padding:9px 12px;font-size:13.5px} .langtoggle button{padding:7px 10px;font-size:12.5px} .hero .tagline-big{font-size:24px} }
+.hide-alongtable{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="/">Glomere<i>.</i></a>
+    <div class="links">
+      <a class="plain" href="/" data-zh="首页" data-en="Home">首页</a>
+      <a class="cta" href="/events" data-zh="近期活动" data-en="Events">近期活动</a>
+      <span class="langtoggle">
+        <button id="btn-zh" class="on" onclick="setLang('zh')">中文</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </span>
+    </div>
+  </nav>
+
+  <!-- ================= CHINESE VERSION ================= -->
+  <main id="lang-zh">
+
+    <div class="hero">
+      <div class="glow"></div><div class="glow2"></div><div class="orb" aria-hidden="true"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div>
+      <span class="badge"><span class="dot"></span>GLOMERE EXPERIENCE LAB · 西雅图</span>
+      <h1>对的人，在对的空间，<br><span class="hl">前所未有的联结。</span></h1>
+      <p class="tagline-big">那种对的人<s>可能</s>会出现的地方。</p>
+      <div class="big-zh">主题聚会 · 轻松加入 · 精选场地</div>
+      <p class="sub">Glomere 把团体聚会做成一场场主题：Tech、交友、节日、美食、读书……每一场，都办在认真挑选过的场地里，那种对的人会出现的地方。没有组局的麻烦，没有硬聊的尴尬：选一个主题，买一张票，出现就行。</p>
+      <div class="cta-row">
+        <a class="btn btn-lime" href="/events">看近期活动 →</a>
+        <a class="btn btn-ghost" href="#how-zh">怎么参加</a>
+      </div>
+      <div class="mini">独自来完全 OK · 大多数人都是一个人来的</div>
+    </div>
+
+    <div class="marquee"><span class="track" data-fill="主题聚会 ✦ 轻松加入 ✦ 精选场地 ✦ 西雅图 ✦ "></span></div>
+
+    <section>
+      <span class="sec-tag">我们的宗旨</span>
+      <h2 class="sec-title">Glomere 的宗旨</h2>
+      <p class="sec-sub">别人卖匹配，Glomere 卖主题。当一群人因为同一个主题走进同一个房间，认识彼此就不再需要硬聊。</p>
+      <div class="pillars">
+        <div class="pillar p-violet">
+          <div class="no">01</div>
+          <h3>主题先行</h3>
+          <p>每一场都有明确的主题。主题是全场共同的语言，也是最自然的破冰方式：你先属于这个房间，社交随后发生。</p>
+          <div class="big">TH</div>
+        </div>
+        <div class="pillar p-lime">
+          <div class="no">02</div>
+          <h3>轻松加入</h3>
+          <p>不用组局，不用凑人，不用认识任何人。看到喜欢的主题，买票就来；一个人来是常态，现场自然有人和你聊起来。</p>
+          <div class="big">GO</div>
+        </div>
+        <div class="pillar p-dark">
+          <div class="no">03</div>
+          <h3>精选房间</h3>
+          <p>酒庄、酒吧、天台、画廊，每一个场地都提前踩过点：光线、音乐、动线与私密感，决定了一晚上的化学反应。房间选对了，人自然就放松了。</p>
+          <div class="big">RM</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-zh">
+      <span class="sec-tag">参加方式</span>
+      <h2 class="sec-title">参加，只要三步</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><h3>选一个主题</h3><p>看看近期活动，挑一个你真正感兴趣的主题。兴趣对了，人就对了。</p></div></div>
+        <div class="step"><div class="n">2</div><div><h3>买一张票</h3><p>在线购票，电子门票会在活动前 5 天内发到你的邮箱，场地地址一并附上。</p></div></div>
+        <div class="step"><div class="n">3</div><div><h3>出现就行</h3><p>剩下的交给主题和房间：游戏、表演和同场的人，会让聊天自然发生。</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <span class="sec-tag">主题</span>
+      <h2 class="sec-title">正在发生的主题</h2>
+      <div class="chips">
+        <span class="chip hot">单身派对</span>
+        <span class="chip">Tech</span>
+        <span class="chip">美食</span>
+        <span class="chip">读书</span>
+        <span class="chip">节日</span>
+        <span class="chip dim">更多主题筹备中</span>
+      </div>
+      <p class="themes-note">主题不设限。任何能把对的人聚到对的场地的想法，都可以成为下一场。</p>
+    </section>
+
+    <section>
+      <span class="sec-tag">近期活动</span>
+      <h2 class="sec-title">近期活动</h2>
+      <a class="event-card" href="/events">
+        <img src="/events-hero.webp" alt="西雅图单身派对">
+        <div class="body">
+          <span class="tag">11月首发</span>
+          <h3>Until We Meet · 西雅图单身派对</h3>
+          <p>本期的主题是「单身派对」：一杯无酒精特调饮料、精致零食、破冰宾果、互动表演，还有压轴的摩斯密码心动密令。轻松愉快，没有速配，没有压力。</p>
+          <div class="meta">11 月 8 日 周日 · 3:00 – 6:00 PM · Vermillion · Seattle</div>
+          <span class="go">查看活动与门票 →</span>
+        </div>
+      </a>
+    </section>
+
+      <section>
+      <span class="sec-tag">我们的应用</span>
+      <h2 class="sec-title">正在建设的应用</h2>
+      <div class="appcards">
+        <a class="appcard" href="https://crux8.app" target="_blank" rel="noopener">
+          <h3>Crux8 · 攀岩搭子</h3>
+          <p>攀岩搭子社区应用：找搭子、约开爬、认识同城岩友。</p>
+          <span class="go2">crux8.app →</span>
+        </a>
+        <a class="appcard hide-alongtable" href="https://alongtable.glomere.tech" target="_blank" rel="noopener">
+          <h3>ALongTable · 客人端</h3>
+          <p>主题聚会客人预订：选主题、选座位、下单。</p>
+          <span class="go2">alongtable.glomere.tech →</span>
+        </a>
+        <a class="appcard hide-alongtable" href="https://alongtablepartners.glomere.tech" target="_blank" rel="noopener">
+          <h3>ALongTable · 商家端</h3>
+          <p>餐厅商家端：智能调价、发布菜单。</p>
+          <span class="go2">alongtablepartners.glomere.tech →</span>
+        </a>
+      </div>
+    </section>
+
+</main>
+
+  <!-- ================= ENGLISH VERSION ================= -->
+  <main id="lang-en" hidden>
+
+    <div class="hero">
+      <div class="glow"></div><div class="glow2"></div><div class="orb" aria-hidden="true"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div>
+      <span class="badge"><span class="dot"></span>GLOMERE EXPERIENCE LAB · SEATTLE</span>
+      <h1>Right people, in the right space.<br><span class="hl">Unprecedented bonds.</span></h1>
+      <p class="tagline-big">Where people <s>might</s> show up.</p>
+      <div class="big-en">Themed Gatherings · Easy to Join · Curated Locations</div>
+      <p class="sub">Glomere turns group gatherings into themed experiences: tech, meeting people, holidays, food, books. Every gathering has a clear theme and takes place in a carefully curated room where people just show up. No organizing hassle, no forced small talk. Pick a theme, grab a ticket, just show up.</p>
+      <div class="cta-row">
+        <a class="btn btn-lime" href="/events">See upcoming events →</a>
+        <a class="btn btn-ghost" href="#how-en">How it works</a>
+      </div>
+      <div class="mini">Coming solo is totally fine. Most people do.</div>
+    </div>
+
+    <div class="marquee"><span class="track en" data-fill="THEMED GATHERINGS ✦ EASY TO JOIN ✦ CURATED LOCATIONS ✦ SEATTLE ✦ "></span></div>
+
+    <section>
+      <span class="sec-tag en">Our Mission</span>
+      <h2 class="sec-title">What Glomere stands for</h2>
+      <p class="sec-sub">Others sell matching. Glomere sells the theme. When a group of people walks into the same room for the same theme, getting to know each other stops being awkward.</p>
+      <div class="pillars">
+        <div class="pillar p-violet">
+          <div class="no">01</div>
+          <h3>Themed first</h3>
+          <p>Every gathering has a clear theme. A theme is the room's shared language, and the most natural icebreaker there is: you belong to the room first, and the socializing follows.</p>
+          <div class="big">TH</div>
+        </div>
+        <div class="pillar p-lime">
+          <div class="no">02</div>
+          <h3>Easy to join</h3>
+          <p>No organizing, no rounding people up, no need to know anyone. See a theme you like, buy a ticket, show up. Coming alone is the norm, and the room takes it from there.</p>
+          <div class="big">GO</div>
+        </div>
+        <div class="pillar p-dark">
+          <div class="no">03</div>
+          <h3>Curated rooms</h3>
+          <p>Wineries, bars, rooftops, galleries — every location is scouted in advance. Light, music, flow and privacy decide the chemistry of a night. Get the room right, and people relax.</p>
+          <div class="big">RM</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-en">
+      <span class="sec-tag en">How It Works</span>
+      <h2 class="sec-title">Joining takes three steps</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><h3>Pick a theme</h3><p>Browse upcoming gatherings and choose a theme you genuinely care about. Right theme, right people.</p></div></div>
+        <div class="step"><div class="n">2</div><div><h3>Grab a ticket</h3><p>Book online. Your e-ticket arrives by email within 5 days before the event, with the venue address attached.</p></div></div>
+        <div class="step"><div class="n">3</div><div><h3>Just show up</h3><p>Leave the rest to the theme and the room: games, performances and the people around you make conversation happen.</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <span class="sec-tag en">Themes</span>
+      <h2 class="sec-title">Themes happening now</h2>
+      <div class="chips">
+        <span class="chip hot">Until We Meet</span>
+        <span class="chip">Tech</span>
+        <span class="chip">Food</span>
+        <span class="chip">Books</span>
+        <span class="chip">Holidays</span>
+        <span class="chip dim">More themes brewing</span>
+      </div>
+      <p class="themes-note">Themes are wide open. Any idea that gathers the right people in the right room can become the next one.</p>
+    </section>
+
+    <section>
+      <span class="sec-tag en">Next Up</span>
+      <h2 class="sec-title">Upcoming</h2>
+      <a class="event-card" href="/events">
+        <img src="/events-hero.webp" alt="Until We Meet — Seattle singles party">
+        <div class="body">
+          <span class="tag">November Premiere</span>
+          <h3>Until We Meet · Seattle Singles Party</h3>
+          <p>This round's theme is the singles party: one non-alcoholic specialty drink, tapas, icebreaker bingo, interactive performances, and a Morse-code finale, the Heart Code. Easy, relaxed, zero speed dating, zero pressure.</p>
+          <div class="meta">SUN, NOV 8 · 3:00 – 6:00 PM · VERMILLION · SEATTLE</div>
+          <span class="go">See event &amp; tickets →</span>
+        </div>
+      </a>
+    </section>
+
+      <section>
+      <span class="sec-tag en">Our Apps</span>
+      <h2 class="sec-title">Apps we're building</h2>
+      <div class="appcards">
+        <a class="appcard" href="https://crux8.app" target="_blank" rel="noopener">
+          <h3>Crux8 · Climbing partners</h3>
+          <p>A climbing partner community: find belayers, join sessions, meet local climbers.</p>
+          <span class="go2">crux8.app →</span>
+        </a>
+        <a class="appcard hide-alongtable" href="https://alongtable.glomere.tech" target="_blank" rel="noopener">
+          <h3>ALongTable · For guests</h3>
+          <p>Themed gathering guest booking: pick a theme, pick a seat, check out.</p>
+          <span class="go2">alongtable.glomere.tech →</span>
+        </a>
+        <a class="appcard hide-alongtable" href="https://alongtablepartners.glomere.tech" target="_blank" rel="noopener">
+          <h3>ALongTable · For restaurants</h3>
+          <p>The restaurant side: smart off-peak pricing, publish the menu.</p>
+          <span class="go2">alongtablepartners.glomere.tech →</span>
+        </a>
+      </div>
+    </section>
+
+</main>
+
+  <footer>
+    <div class="flogo">Glomere<i>.</i></div>
+    <p>Glomere Inc. · Seattle, WA<br><span data-zh="联系我们：" data-en="Contact: ">联系我们：</span><a href="mailto:hello@glomere.tech">hello@glomere.tech</a> · <span data-zh="活动合作：" data-en="Partnerships: ">活动合作：</span><a href="mailto:events@glomere.tech">events@glomere.tech</a></p>
+  </footer>
+
+</div>
+<script>
+  document.querySelectorAll('.marquee .track').forEach(function(el){
+    el.textContent = el.getAttribute('data-fill').repeat(4);
+  });
+  function setLang(l){
+    var zh = (l === 'zh');
+    document.getElementById('lang-zh').hidden = !zh;
+    document.getElementById('lang-en').hidden = zh;
+    document.getElementById('btn-zh').classList.toggle('on', zh);
+    document.getElementById('btn-en').classList.toggle('on', !zh);
+    document.documentElement.lang = zh ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      if (el.tagName === 'A' || el.tagName === 'SPAN') el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+    });
+    try { localStorage.setItem('glomere-lang', l); } catch(e) {}
+  }
+  (function(){
+    var saved = null;
+    try { saved = localStorage.getItem('glomere-lang'); } catch(e) {}
+    if (saved) { setLang(saved); return; }
+    var nav = (navigator.language || 'zh').toLowerCase();
+    setLang(nav.indexOf('zh') === 0 ? 'zh' : 'en');
+  })();
+</script>
+<script>
+(function(){
+  try {
+    if (new URLSearchParams(window.location.search).get('alongtable') === '1') {
+      document.querySelectorAll('.hide-alongtable').forEach(function(el){ el.classList.remove('hide-alongtable'); });
+    }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

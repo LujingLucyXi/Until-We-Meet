@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration · Seattle Singles Party · Glomere</title>
+<meta name="description" content="Glomere Seattle singles party registration: fill in your info and agree to the terms to complete your ticket.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+SC:wght@600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#ece1c6; --cream:#2e2115; --cream-soft:#6d5836; --muted:#a68d5f;
+--gold:#c9a24b; --gold-hi:#a37e22; --wine:#a63a46; --wine-deep:#7a1e2b;
+--line:rgba(154,116,31,.30); --field:rgba(255,255,255,.65);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--cream);background:var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;min-height:100vh;background:
+radial-gradient(120% 40% at 85% 0%,rgba(201,162,75,.18),transparent 55%),
+linear-gradient(180deg,#fffdf6 0%,#fbf4e1 48%,#f7edd3 100%);
+box-shadow:0 0 60px rgba(122,94,32,.18)}
+a{color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;font-weight:700;letter-spacing:.34em;color:var(--cream);text-decoration:none}
+.logo small{display:block;font-size:8.5px;letter-spacing:.56em;color:var(--gold);font-weight:600;margin-top:1px}
+nav .links a{text-decoration:none;color:var(--cream-soft);font-weight:500;font-size:14px}
+main{padding:38px 28px 50px}
+.kicker{text-align:center;letter-spacing:.34em;font-size:10.5px;font-weight:600;color:var(--gold);text-transform:uppercase}
+h1{font-family:'Noto Serif SC','Songti SC',serif;font-size:28px;font-weight:700;text-align:center;margin:10px 0 8px}
+.sub{text-align:center;color:var(--cream-soft);font-size:14px;line-height:1.9;max-width:440px;margin:0 auto 8px}
+.ticket-line{margin:22px auto 4px;max-width:440px;text-align:center;border:1.5px solid var(--gold);border-radius:14px;padding:14px 18px;background:linear-gradient(180deg,rgba(201,162,75,.16),rgba(201,162,75,.05));font-size:15px}
+.ticket-line b{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;color:var(--cream)}
+form{max-width:440px;margin:26px auto 0}
+.f{margin-bottom:18px}
+.f label.lab{display:block;font-size:13.5px;font-weight:600;color:var(--cream);margin-bottom:8px;letter-spacing:.04em}
+.f input[type=text],.f input[type=email],.f input[type=number],.f select{width:100%;background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15.5px;color:var(--cream);font-family:inherit;outline:none}
+.f input:focus,.f select:focus{border-color:var(--gold-hi)}
+.f input::placeholder{color:#b3a077}
+.radios{display:flex;gap:10px;flex-wrap:wrap}
+.radios label{flex:1;min-width:96px;text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:12px 8px;font-size:14.5px;color:var(--cream-soft);cursor:pointer;background:var(--field)}
+.radios input{display:none}
+.radios label:has(input:checked){border-color:var(--gold-hi);color:var(--cream);background:rgba(201,162,75,.16);font-weight:600}
+.terms{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px;background:var(--field);font-size:13.5px;line-height:1.8;color:var(--cream-soft)}
+.terms input{margin-top:4px;width:17px;height:17px;accent-color:var(--wine);flex:0 0 auto}
+.terms a{color:var(--gold-hi);font-weight:600;text-decoration:none}
+.err{display:none;color:#b3342a;font-size:13.5px;margin:12px 0 0;line-height:1.7}
+button{width:100%;margin-top:22px;background:linear-gradient(120deg,var(--wine),var(--wine-deep));color:#fdf3e3;font-size:16px;font-weight:600;padding:15px;border:none;border-radius:999px;cursor:pointer;font-family:inherit}
+button:disabled{opacity:.6}
+.note{text-align:center;font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:14px}
+.terms-sec{max-width:440px;margin:38px auto 0;border-top:1px solid var(--line);padding-top:26px}
+.terms-sec h2{font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;text-align:center;color:var(--cream)}
+.terms-sec .tsub{text-align:center;font-size:12.5px;color:var(--muted);margin:8px 0 18px;line-height:1.8}
+.terms-sec p{font-size:13px;color:var(--cream-soft);line-height:1.95;margin-bottom:12px;text-align:left}
+.terms-sec p b{color:var(--cream)}
+.terms-sec a{color:var(--gold-hi);font-weight:600;text-decoration:none}
+footer{padding:10px 28px 40px;text-align:center}
+footer p{font-size:12.5px;color:var(--muted);line-height:1.9}
+footer a{color:var(--gold-hi);text-decoration:none;font-weight:600}
+@media (max-width:520px){ html,body{overflow-x:hidden} main{padding:32px 20px 44px} nav{padding:16px 16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="/">GLOMERE<small>EXPERIENCE LAB</small></a>
+    <div class="links"><a href="/events">← Back to event page</a></div>
+  </nav>
+
+  <main>
+    <div class="kicker">Registration</div>
+    <h1>Registration</h1>
+    <p class="sub">Until We Meet · Seattle Singles Party · Sun 11/8, 3:00 – 6:00 PM<br>Fill in your registration info first; after submitting, you will go to a secure payment page to complete your ticket.</p>
+    <div class="ticket-line">Your ticket: <b id="ticketName">Early Bird</b></div>
+
+    <p class="note" id="bundleNote" style="display:none">This bundle includes two spots.</p>
+
+    <form id="regForm" novalidate>
+      <div class="f" id="roleField" style="display:none">
+        <label class="lab">Preferred role (volunteers)</label>
+        <div class="radios">
+          <label><input type="radio" name="vrole" value="摄影">Photography</label>
+          <label><input type="radio" name="vrole" value="统筹协调">Coordination</label>
+          <label><input type="radio" name="vrole" value="餐饮协助">Food &amp; Beverage Support</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab" for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name" autocomplete="name">
+      </div>
+      <div class="f">
+        <label class="lab" for="email">Email</label>
+        <input type="email" id="email" placeholder="Your e-ticket and event updates will be sent here" autocomplete="email">
+      </div>
+      <div class="f">
+        <label class="lab" for="job">Occupation</label>
+        <input type="text" id="job" placeholder="e.g. Software engineer / Designer / Student">
+      </div>
+      <div class="f">
+        <label class="lab">Gender</label>
+        <div class="radios">
+          <label><input type="radio" name="gender" value="female">Female</label>
+          <label><input type="radio" name="gender" value="male">Male</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab">Orientation (optional)</label>
+        <div class="radios">
+          <label><input type="checkbox" name="orientation" value="喜欢男生">Interested in men</label>
+          <label><input type="checkbox" name="orientation" value="喜欢女生">Interested in women</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab" for="age">Age</label>
+        <input type="number" id="age" min="18" max="99" placeholder="This event is for ages 26-37">
+      </div>
+      <div class="f">
+        <label class="lab" for="diet">Dietary restrictions / allergies (optional)</label>
+        <input type="text" id="diet" placeholder="e.g. nut allergy, vegetarian, gluten-free. Leave blank if none">
+      </div>
+      <div class="f">
+        <label class="lab" for="speaksChinese">Do you speak Chinese? (Just for host information)</label>
+        <select id="speaksChinese">
+          <option value="">Please select</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="f">
+        <label class="lab">What are you here for</label>
+        <div class="radios">
+          <label><input type="radio" name="intent" value="交朋友">Making friends</label>
+          <label><input type="radio" name="intent" value="恋爱">Dating</label>
+          <label><input type="radio" name="intent" value="人生队友">Life partner</label>
+        </div>
+      </div>
+      <div class="terms">
+        <input type="checkbox" id="agree">
+        <span>I have read and agree to the <a href="#terms">Terms and Disclaimer</a> below, including: the notes on drinking at the event, the voluntary socializing principle, the organizer not being responsible for post-event contact, and that event photos may be used in the recap. If I strongly object to my photos being used, I will contact the organizer.</span>
+      </div>
+      <p class="err" id="err"></p>
+      <div id="doneBox" style="display:none;text-align:center;border:1.5px solid var(--gold);border-radius:14px;padding:20px 18px;background:linear-gradient(180deg,rgba(201,162,75,.16),rgba(201,162,75,.05));font-size:15px;line-height:1.9">
+        <b style="font-size:17px">Registration received, thank you!</b><br>Volunteers do not need to pay. We will email you before the event to confirm your role.
+      </div>
+      <button type="submit" id="submitBtn">Submit and proceed to payment →</button>
+      <p class="note">Your registration info is used only for this event's arrangements and communication, and will never be sold or used for other purposes.<br>Payment is completed on Stripe's secure payment page.</p>
+    </form>
+
+    <section class="terms-sec" id="terms">
+      <h2>Terms and Disclaimer</h2>
+      <p class="tsub">Please read these terms before registering. Completing your purchase means you have read, understood, and agreed to all of them.</p>
+      <p><b>Age and alcohol.</b> The suggested age range for this event is 26-37. Anyone 21 or older may attend, and you must be 21 or older to drink. Age and occupation as entered at registration are self-reported and are not verified by the organizer. Drinking is entirely voluntary. Please drink responsibly and know your limits. You are responsible for any consequences of your own drinking. The organizer may stop serving anyone who is visibly intoxicated or unwell. Please bring a valid photo ID if you wish to purchase alcohol. Do not drink and drive. Please arrange a designated driver or carpool in advance.</p>
+      <p><b>Language.</b> Performances at this event are mainly in Chinese. Friends who do not speak Chinese are equally welcome.</p>
+      <p><b>Voluntary socializing.</b> This is a voluntary social event. All interaction with other participants is entirely mutual. Please respect everyone's wishes and personal boundaries. Anyone may decline or end any interaction at any time, without giving a reason.</p>
+      <p><b>After the event.</b> Whether to exchange contact information or stay in touch after the event is entirely each participant's own decision. All contact, interaction, and relationships after the event are personal matters between participants. The organizer is not responsible for anything that happens after the event.</p>
+      <p><b>Photos and video.</b> The organizer (or photographers engaged by the organizer) will take photos and short videos at the event for the event recap, and for Glomere's website and social media event records and promotion. By purchasing a ticket and attending, you agree to the use of material including your likeness within the above scope. If you strongly object to being photographed or to your photos being used, please contact the organizer before or after the event at <a href="mailto:events@glomere.tech">events@glomere.tech</a>, and we will do our best to avoid photographing you and to remove or blur published material featuring you.</p>
+      <p><b>Other.</b> Please look after your own belongings. The organizer is not responsible for loss or damage. Participants are responsible for their own behavior. The organizer reserves final discretion on site: anyone who disrupts the event or its atmosphere, makes others clearly uncomfortable, or is clearly outside the suggested age range may be asked to leave, without a ticket refund.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Questions? Write to <a href="mailto:events@glomere.tech">events@glomere.tech</a></p>
+  </footer>
+
+</div>
+<script>
+var LINKS = {
+  early: { female: "https://buy.stripe.com/9B600j6Vi0qP0Cc0Y64sE00", male: "https://buy.stripe.com/8x29ATgvSc9x0Cc4ai4sE01" },
+  late:  { female: "https://buy.stripe.com/bJedR94Naa1p5Ww4ai4sE0d", male: "https://buy.stripe.com/9B6bJ10wU0qP4Ss6iq4sE0f" },
+  bundle: { female: "https://buy.stripe.com/bJe14n4Nab5t2Kk4ai4sE02", male: "https://buy.stripe.com/9B6eVd2F25L9acM8qy4sE03" }
+};
+var PRICES = {
+  early: { female: "$39.99", male: "$49.99" },
+  late: { female: "$49.99", male: "$59.99" },
+  bundle: { female: "$66", male: "$80" }
+};
+var NAMES = { early: "Early Bird", late: "Late Bird" };
+var q = new URLSearchParams(location.search);
+var tier = (q.get("tier") === "late") ? "late" : (q.get("tier") === "bundle") ? "bundle" : (q.get("tier") === "volunteer") ? "volunteer" : "early";
+var preGender = q.get("gender");
+function ticketLabel() {
+  var g = document.querySelector('input[name="gender"]:checked');
+  var gv = g ? g.value : null;
+  if (tier === "volunteer") return "Volunteer Ticket · Free · $0";
+  if (tier === "bundle") return gv ? (gv === "male" ? "Buddies Bundle" : "Besties Bundle") + " " + PRICES.bundle[gv] : "Bundle (2 spots)";
+  var gName = gv ? (gv === "female" ? " · Female" : " · Male") : "";
+  return NAMES[tier] + gName + (gv ? " " + PRICES[tier][gv] : "");
+}
+function syncTicketLine() {
+  document.getElementById("ticketName").textContent = ticketLabel();
+  document.getElementById("bundleNote").style.display = (tier === "bundle") ? "block" : "none";
+  document.getElementById("roleField").style.display = (tier === "volunteer") ? "block" : "none";
+  if (tier === "volunteer") document.getElementById("submitBtn").textContent = "Submit registration →";
+}
+if (preGender === "female" || preGender === "male") {
+  document.querySelector('input[name="gender"][value="' + preGender + '"]').checked = true;
+}
+document.querySelectorAll('input[name="gender"]').forEach(function (r) { r.addEventListener("change", syncTicketLine); });
+syncTicketLine();
+
+document.getElementById("regForm").addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  var err = document.getElementById("err");
+  function fail(msg) { err.textContent = msg; err.style.display = "block"; err.scrollIntoView({behavior:"smooth", block:"center"}); }
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var job = document.getElementById("job").value.trim();
+  var gEl = document.querySelector('input[name="gender"]:checked');
+  var age = parseInt(document.getElementById("age").value, 10);
+  var iEl = document.querySelector('input[name="intent"]:checked');
+  var oEls = document.querySelectorAll('input[name="orientation"]:checked');
+  var agree = document.getElementById("agree").checked;
+  if (tier === "volunteer") return fail("Volunteer spots are filled, thank you for your interest. You are welcome to join with a regular ticket.");
+  if (!name) return fail("Please enter your name.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("Please enter a valid email. Your e-ticket will be sent there.");
+  if (!job) return fail("Please enter your occupation.");
+  if (!gEl) return fail("Please select a gender (female and male tickets are counted separately).");
+  if (!age || isNaN(age)) return fail("Please enter your age.");
+  if (age < 26 || age > 37) return fail("This event is for ages 26-37. If you are outside that range, you cannot register for this one yet. Please follow Glomere for other themed events.");
+  if (!iEl) return fail("Please select what you are here for.");
+  var roleEl = document.querySelector('input[name="vrole"]:checked');
+  if (tier === "volunteer" && !roleEl) return fail("Please select a preferred role (Photography / Coordination / Food & Beverage Support).");
+  if (!agree) return fail("Please read and agree to the Terms and Disclaimer first.");
+  err.style.display = "none";
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "Submitting…";
+  var speaksChinese = document.getElementById("speaksChinese").value || "Not answered";
+  var target = (tier === "volunteer") ? null : LINKS[tier][gEl.value];
+  var payRef = (tier === "volunteer") ? null : (function () { try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {} return "pay_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); })();
+  var payload = {
+    "ticket_tier": tier,
+    "ticket_label": ticketLabel(),
+    "role": roleEl ? roleEl.value : null,
+    "name": name,
+    "email": email,
+    "job": job,
+    "gender": gEl.value === "female" ? "女生" : "男生",
+    "age": age,
+    "intent": iEl.value,
+    "diet": document.getElementById("diet").value.trim() || "无",
+    "orientation": oEls.length ? Array.prototype.map.call(oEls, function (el) { return el.value; }).join("、") : "未填",
+    "speaks_chinese": speaksChinese,
+    "agreed": true,
+    "pay_ref": payRef,
+    "payment_url": target,
+    "lang": "en"
+  };
+  function proceed() {
+    if (tier === "volunteer") {
+      btn.style.display = "none";
+      document.getElementById("doneBox").style.display = "block";
+      document.getElementById("doneBox").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (!target) {
+      btn.disabled = false; btn.textContent = "Submit and proceed to payment →";
+      fail("Payment is being updated. Your registration info has been saved. Please write to events@glomere.tech to lock in your spot, and we will send you the payment link directly.");
+      return;
+    }
+    window.location.href = target + "?prefilled_email=" + encodeURIComponent(email) + "&client_reference_id=" + encodeURIComponent(payRef);
+  }
+  function postPayload(p) {
+    return fetch("https://jlvlmuyegirglbyrnfbl.supabase.co/rest/v1/glomere_registrations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "sb_publishable_9o7Xw_nHYbbl6065PWzOIg_cSVlbdBY",
+        "Authorization": "Bearer sb_publishable_9o7Xw_nHYbbl6065PWzOIg_cSVlbdBY",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(p)
+    }).then(function (r) { return r.ok ? "ok" : "http"; }).catch(function () { return "net"; });
+  }
+  var send = postPayload(payload).then(function (res) { return res === "ok"; });
+  var timeout = new Promise(function (r) { setTimeout(function () { r("timeout"); }, 6000); });
+  Promise.race([send, timeout]).then(function (res) {
+    if (res === true || res === "timeout") { proceed(); return; }
+    btn.disabled = false; btn.textContent = "Submit registration →";
+    fail("Submission failed. Please check your connection and try again. If it still does not work, please write to events@glomere.tech to register directly.");
+  });
+});
+</script>
+</body>
+</html>

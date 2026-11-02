@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Until We Meet · 西雅图单身派对 · Glomere</title>
+<meta name="description" content="Glomere 西雅图单身派对：11 月 8 日周日下午 3–6 点。无酒精特调饮料、精致零食、破冰宾果、互动表演与摩斯密码心动密令。We bond people in unprecedented ways.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+SC:wght@600;700;900&family=Ma+Shan+Zheng&family=Great+Vibes&family=Pinyon+Script&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#ece1c6; --panel:#fffdf4; --panel2:#faf2dd;
+--cream:#2e2115; --cream-soft:#6d5836; --muted:#a68d5f;
+--gold:#c9a24b; --gold-hi:#a37e22; --wine:#a63a46; --wine-deep:#7a1e2b;
+--line:rgba(154,116,31,.30);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} }
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);font-size:11px;margin:26px auto 0}
+.orn::before,.orn::after{content:"";height:1px;width:74px;background:linear-gradient(90deg,transparent,var(--gold));display:block}
+.orn::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;width:min(600px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,253,246,.88);backdrop-filter:blur(10px);border:1.5px solid var(--gold);border-radius:999px;padding:9px 9px 9px 20px;box-shadow:0 16px 40px rgba(122,94,32,.30)}
+.sticky-cta .sc-t{font-size:12px;color:var(--cream-soft);line-height:1.45}
+.sticky-cta .sc-t b{display:block;font-size:14.5px;color:var(--cream)}
+.sticky-cta a{flex:0 0 auto;background:linear-gradient(120deg,var(--wine),var(--wine-deep));color:#fdf3e3;font-size:14.5px;font-weight:600;padding:12px 22px;border-radius:999px;text-decoration:none}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:18px;font-size:12.5px;color:var(--cream-soft)}
+.trust span::before{content:"✓ ";color:var(--gold-hi);font-weight:700}
+.ticket{position:relative}
+.ticket .save{position:absolute;top:16px;right:18px;background:linear-gradient(120deg,#e8c877,var(--gold));color:#241a08;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+@media (max-width:520px){ html,body{overflow-x:hidden} body{padding-bottom:118px} }
+body{font-family:'Inter',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--cream);background:var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;min-height:100vh;background:
+radial-gradient(120% 46% at 85% 0%,rgba(201,162,75,.20),transparent 55%),
+radial-gradient(90% 34% at 8% 22%,rgba(166,58,70,.07),transparent 60%),
+linear-gradient(180deg,#fffdf6 0%,#fbf4e1 48%,#f7edd3 100%);
+box-shadow:0 0 60px rgba(122,94,32,.18)}
+a{color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;font-weight:700;letter-spacing:.34em;color:var(--cream);text-decoration:none}
+.logo small{display:block;font-size:8.5px;letter-spacing:.56em;color:var(--gold-hi);font-weight:600;margin-top:1px}
+nav .links{display:flex;gap:22px;font-size:14px;align-items:center}
+nav .links a{text-decoration:none;color:var(--cream-soft);font-weight:500}
+nav .links a.cur{color:var(--gold-hi);font-weight:600;border:1.5px solid var(--gold);padding:7px 16px;border-radius:999px}
+.hero{text-align:center;padding:44px 28px 0;position:relative}
+.badge{display:inline-block;border:1.5px solid var(--gold);color:var(--gold-hi);font-size:12.5px;font-weight:600;letter-spacing:.22em;padding:8px 18px;border-radius:999px;background:rgba(201,162,75,.10)}
+.hero .cn-title{font-family:'Ma Shan Zheng','Noto Serif SC','Songti SC',serif;font-size:36px;color:var(--cream);margin-top:26px;letter-spacing:.12em}
+.hero h1{font-family:'Pinyon Script','Great Vibes',cursive;font-weight:400;font-size:104px;line-height:1.05;margin:0;color:var(--wine);background:linear-gradient(100deg,#7a1e2b 5%,#a63a46 42%,#cf7a63 90%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transform:rotate(-2deg);filter:drop-shadow(0 4px 22px rgba(166,58,70,.18))}
+.hero .lines{margin-top:22px;font-family:'Noto Serif SC','Songti SC',serif;font-size:16.5px;line-height:2.05;color:var(--cream);letter-spacing:.14em}
+.hero .lines span{display:block}
+.hero .en{margin-top:16px;font-size:10.5px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;line-height:2}
+.meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
+.meta span{font-size:13px;font-weight:600;color:var(--cream);background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+.meta span.hot{color:#241a08;background:linear-gradient(120deg,#e8c877,var(--gold));border-color:transparent}
+.art{margin:30px 28px 0;border-radius:6px;overflow:hidden;background:#fffdf8;padding:10px;border:1px solid rgba(201,162,75,.65);box-shadow:0 24px 50px rgba(122,94,32,.22), inset 0 0 0 1px rgba(201,162,75,.25)}
+.art img{width:100%;display:block;border-radius:3px}
+section{padding:42px 28px;border-bottom:1px solid var(--line)}
+.sec-kicker{text-align:center;letter-spacing:.34em;font-size:10.5px;font-weight:600;color:var(--gold-hi);text-transform:uppercase}
+.sec-title{font-family:'Noto Serif SC','Songti SC',serif;font-size:26px;font-weight:900;letter-spacing:.06em;color:var(--cream);text-align:center;margin:10px 0 8px}
+.sec-sub{text-align:center;color:var(--cream-soft);font-size:14px;line-height:1.9;max-width:460px;margin:0 auto 26px}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.feat{border:1.5px solid var(--line);border-radius:16px;padding:19px;background:rgba(255,255,255,.6)}
+.feat svg{width:30px;height:30px;stroke:var(--gold-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px}
+.feat h3{font-family:'Noto Serif SC','Songti SC',serif;font-size:17.5px;font-weight:700;color:var(--cream);margin-bottom:6px}
+.feat p{font-size:13.5px;color:var(--cream-soft);line-height:1.8}
+.feat.wide{grid-column:1/-1}
+.step{display:flex;gap:16px;margin-bottom:20px;text-align:left}
+.step .num{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,var(--wine),var(--wine-deep));color:#fdf3e3;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;margin-top:2px}
+.step h3{font-family:'Noto Serif SC','Songti SC',serif;font-size:18px;font-weight:700;color:var(--cream);margin-bottom:5px}
+.step p{font-size:13.5px;color:var(--cream-soft);line-height:1.85}
+.flourish{text-align:center;font-family:'Great Vibes',cursive;font-size:40px;color:var(--wine);padding:6px 0 2px;transform:rotate(-1.6deg)}
+.dress{display:flex;align-items:flex-start;justify-content:center;gap:12px;margin-top:4px}
+.sw{width:52px;height:52px;border-radius:12px;border:1px solid var(--line)}
+.dress .cap{text-align:center;font-size:11px;color:var(--cream-soft);margin-top:7px;letter-spacing:.08em}
+.dress-note{text-align:center;font-size:13.5px;color:var(--cream-soft);margin-top:16px;line-height:1.8}
+.ticket{display:block;text-decoration:none;border:1.5px solid var(--line);border-radius:16px;padding:20px;background:rgba(255,255,255,.6);margin-bottom:14px;transition:border-color .15s, box-shadow .15s}
+.ticket:hover{border-color:var(--gold);box-shadow:0 10px 30px rgba(169,132,44,.22)}
+.ticket .tag{font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ticket .row{display:flex;align-items:baseline;justify-content:space-between;margin-top:8px}
+.ticket .price{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;font-weight:700;color:var(--cream);line-height:1}
+.ticket .price small{font-size:14px;font-family:'Inter',sans-serif;font-weight:500;color:var(--muted)}
+.ticket .buy{flex:0 0 auto;background:linear-gradient(120deg,var(--wine),var(--wine-deep));color:#fdf3e3;font-size:14px;font-weight:600;padding:11px 20px;border-radius:999px}
+.ticket .desc{font-size:13.5px;color:var(--cream-soft);margin-top:10px;line-height:1.6}
+.ticket.featured{background:linear-gradient(180deg,rgba(201,162,75,.18),rgba(201,162,75,.06));border-color:var(--gold)}
+.ticket.featured .tag{color:var(--gold-hi)}
+.ticket.disabled{opacity:.7;pointer-events:none}
+.ticket.disabled .buy{background:#ddd0ae;color:#7a6742}
+.includes{text-align:center;font-size:13.5px;color:var(--cream-soft);line-height:1.9;margin-top:6px}
+.includes b{color:var(--gold-hi)}
+.notes{font-size:13.5px;color:var(--cream-soft);line-height:2.05;max-width:470px;margin:0 auto}
+.notes b{color:var(--cream)}
+.notes a{color:var(--gold-hi);font-weight:600;text-decoration:none}
+footer{padding:36px 28px 46px;text-align:center}
+footer .flogo{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:700;letter-spacing:.34em;color:var(--cream)}
+footer .ftag{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:14.5px;color:var(--gold-hi);margin-top:8px}
+footer p{font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:10px}
+footer a{color:var(--gold-hi);text-decoration:none;font-weight:600}
+@media (max-width:520px){ .feat-grid{grid-template-columns:1fr} .hero h1{font-size:52px} .hero .cn-title{font-size:28px} .art{margin:28px 18px 0} section{padding:38px 20px} .hero{padding:38px 20px 0} nav{padding:16px 16px} nav .links{gap:10px} nav .links a:not(.cur){display:none} .logo{font-size:20px} .logo small{font-size:8px;letter-spacing:.5em} nav .links a.cur{padding:7px 12px} .langtoggle button{padding:6px 10px;font-size:12px} .dress{flex-wrap:wrap;gap:10px} .sw{width:48px;height:48px} }
+.langtoggle{display:flex;border:1.5px solid var(--gold);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.langtoggle button{appearance:none;border:0;background:transparent;color:var(--cream-soft);font-family:inherit;font-size:12.5px;font-weight:700;padding:7px 12px;cursor:pointer}
+.langtoggle button.on{background:linear-gradient(120deg,#e8c877,var(--gold));color:#241a08}
+.en-title{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:30px !important;letter-spacing:.34em !important;text-transform:uppercase}
+</style>
+
+<style>
+/* Shooting stars — live 2026-10-27, one every ~7s */
+.fx-layer{position:fixed;inset:0;z-index:200;pointer-events:none;overflow:hidden}
+.fx-layer .shoot{position:absolute;top:0;left:0;animation:fx-shoot linear infinite;will-change:transform,opacity}
+.fx-layer .shoot i{display:block;height:2px;border-radius:2px;background:linear-gradient(to right,#ffffff,#f2d488 25%,rgba(232,200,119,0));box-shadow:0 0 10px rgba(242,212,136,.8);transform:rotate(-28deg)}
+.fx-layer .shoot-a{animation-name:fx-shoot-a}
+.fx-layer .shoot-b{animation-name:fx-shoot-b}
+@keyframes fx-shoot-a{
+  0%{transform:translate(105vw,-5vh);opacity:0}
+  3%{opacity:1}
+  12%{transform:translate(-15vw,55vh);opacity:1}
+  16%,100%{transform:translate(-22vw,60vh);opacity:0}
+}
+@keyframes fx-shoot-b{
+  0%{transform:translate(92vw,4vh);opacity:0}
+  3%{opacity:1}
+  12%{transform:translate(-18vw,72vh);opacity:1}
+  16%,100%{transform:translate(-25vw,78vh);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.fx-layer{display:none}}
+</style>
+</head>
+<body>
+<div class="fx-layer" aria-hidden="true"><div class="shoot shoot-a" style="animation-duration:21s;animation-delay:0s"><i style="width:140px"></i></div><div class="shoot shoot-b" style="animation-duration:21s;animation-delay:-7s"><i style="width:110px"></i></div><div class="shoot shoot-a" style="animation-duration:21s;animation-delay:-14s"><i style="width:170px"></i></div></div>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="/">GLOMERE<small>EXPERIENCE LAB</small></a>
+    <div class="links">
+      <a href="/" data-zh="首页" data-en="Home">首页</a>
+      <a class="cur" href="/events" data-zh="近期活动" data-en="Events">近期活动</a>
+      <span class="langtoggle">
+        <button id="btn-zh" class="on" onclick="setLang('zh')">中文</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </span>
+    </div>
+  </nav>
+
+  <main id="lang-zh">
+  <div class="hero">
+    <span class="badge">西雅图 · 11月首发</span>
+    <div class="cn-title">单身派对</div>
+    <h1>Until We Meet</h1>
+    <p class="en">New People · Bold Conversations<br>Unexpected Connections</p>
+    <div class="meta">
+      <span class="hot">11/8 周日 · 3:00 – 6:00 PM</span>
+      <span>Optional After Party · 结束后自愿续摊</span>
+      <span>Vermillion Art Gallery and Bar · Seattle</span>
+      <span>26 – 37 岁</span>
+      <span>女生 · 男生 各 30 张票</span>
+    </div>
+  </div>
+
+  <div class="orn">✦</div>
+
+  <div class="art reveal">
+    <img src="/events-poster.webp" alt="Until We Meet 海报：黄昏天台上举杯交谈的年轻人，远处是西雅图天际线与太空针塔">
+  </div>
+
+  <section class="reveal">
+    <div class="sec-kicker">The Afternoon</div>
+    <h2 class="sec-title">这个下午有什么</h2>
+    <p class="sec-sub">这个下午，在 Vermillion Art Gallery and Bar（1508 11th Ave, Seattle 98122）幽微精致的艺术空间里，你将手持一杯无酒精特调，在轻食、破冰宾果与互动表演的欢笑中，自然地认识新朋友。现场以贴纸标明交友意向，来意一目了然；没有速配轮桌，也没有硬聊环节，全程自由走动、自由聊天，最后以一封心动密令，为这个下午留下一点神秘的韵脚。现场吧台可另购鸡尾酒（需出示 ID）。</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16l-8 9z"/><path d="M12 13v7"/><path d="M8 20h8"/></svg>
+        <h3>特调饮料 · 精致小食</h3><p>票含一杯无酒精特调饮料，精致小食全程供应，边聊边吃。现场吧台可另购鸡尾酒（需出示 ID）。</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.2" cy="8.2" r="1.3" fill="currentColor"/><circle cx="15.8" cy="15.8" r="1.3" fill="currentColor"/><circle cx="15.8" cy="8.2" r="1.3" fill="currentColor"/><circle cx="8.2" cy="15.8" r="1.3" fill="currentColor"/></svg>
+        <h3>破冰宾果</h3><p>一人一张宾果卡：小任务带你自然地认识全场，完成攒积分，最高分赢好礼。爱心贴纸先表明来意，开口不用猜。</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg>
+        <h3>互动表演</h3><p>小型现场表演穿插在聊天之间，气氛不冷场。</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <h3>心动密令</h3><p>把想说的话、想留的言，写给那个 TA——编成摩斯密令，投进心动箱。活动后，我们连同你的联系方式一起推送给 TA。不写，也没关系。</p>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin-top:18px"><b style="color:var(--gold-hi)">网红蛋挞 · 精致小食 · 0度特调 · 西雅图脱口秀演员倾情加入，更多惊喜等你来体验。</b></p>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kicker">How It Works</div>
+    <h2 class="sec-title">怎么玩</h2>
+    <p class="sec-sub">三步，零门槛。所有的设计，都是为了让开口变得容易，让拒绝变得体面。</p>
+    <div class="step">
+      <div class="num">1</div>
+      <div><h3>贴上你的爱心贴纸</h3><p>入场领名字贴和编号，再选一枚爱心贴纸表明来意：白色爱心，轻松交友；粉色爱心，恋爱接触；红色爱心，诚心寻找人生搭子。先看懂来意，聊天就轻松。</p></div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div><h3>玩游戏，攒积分</h3><p>端着特调饮料自由走动，用宾果卡上的小任务去认识新朋友。每完成一条记 1 分，结尾按分数颁奖。</p></div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div><h3>心动密令（可选）</h3><p>把想说的话、想留的言写给 TA——将 TA 的编号编成摩斯密令（ · — · — ），连同你的联系方式投进心动箱；活动后，我们把你的联系方式和留言一起推送给 TA。这不是一个环节，只是一个选项。</p></div>
+    </div>
+    <div class="flourish">We bond people in unprecedented ways</div>
+    <div class="sec-kicker" style="margin-top:26px">Dress Code</div>
+    <h2 class="sec-title" style="font-size:22px">建议色系</h2>
+    <div class="dress">
+      <div><div class="sw" style="background:#26221f"></div><div class="cap">黑</div></div>
+      <div><div class="sw" style="background:#fbfaf6"></div><div class="cap">白</div></div>
+      <div><div class="sw" style="background:#9b968e"></div><div class="cap">灰</div></div>
+      <div><div class="sw" style="background:#d79aa3"></div><div class="cap">粉</div></div>
+      <div><div class="sw" style="background:#7a1e2b"></div><div class="cap">酒红</div></div>
+      <div><div class="sw" style="background:#8a5a3b"></div><div class="cap">棕</div></div>
+    </div>
+    <p class="dress-note">Dress code 建议色系：黑、白、灰、粉、酒红、棕。</p>
+  </section>
+
+  <section class="reveal" id="tickets" style="scroll-margin-top:16px">
+    <div class="sec-kicker">Tickets</div>
+    <h2 class="sec-title">门票</h2>
+    <p class="sec-sub">所有门票包含：<b style="color:var(--gold-hi)">一杯无酒精特调饮料 · 精致零食 · 全场游戏与表演 · 心动密令</b>。点击即跳转到安全支付页。</p>
+    <p class="sec-sub" style="color:var(--gold-hi)"><b>早鸟延长通知：早鸟价延长至 11 月 5 日，晚鸟票 11 月 6 日起开放。</b></p>
+
+    <a class="ticket featured" href="/register?tier=early&gender=female">
+      <div class="tag">早鸟票 · 女生</div>
+      <div class="row"><div class="price">$39.99 <small>/ 人</small></div><span class="buy">填写信息报名 →</span></div>
+      <div class="desc">11月首发早鸟价，<s>11 月 1 日</s> 延长至 11 月 5 日截止。</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=early&gender=male">
+      <div class="tag">早鸟票 · 男生</div>
+      <div class="row"><div class="price">$49.99 <small>/ 人</small></div><span class="buy">填写信息报名 →</span></div>
+      <div class="desc">11月首发早鸟价，<s>11 月 1 日</s> 延长至 11 月 5 日截止。</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=bundle&gender=female">
+      <span class="save">省 $13.98</span>
+      <div class="tag">闺蜜套票 · 女生两位</div>
+      <div class="row"><div class="price">$66 <small>/ 两位</small></div><span class="buy">填写信息报名 →</span></div>
+      <div class="desc">和闺蜜一起来：两位女生一起报名，人均 $33，名额计入女生 30 张之内。</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=bundle&gender=male">
+      <span class="save">省 $19.98</span>
+      <div class="tag">兄弟套票 · 男生两位</div>
+      <div class="row"><div class="price">$80 <small>/ 两位</small></div><span class="buy">填写信息报名 →</span></div>
+      <div class="desc">和兄弟一起来：两位男生一起报名，人均 $40，名额计入男生 30 张之内。</div>
+    </a>
+
+    <div class="ticket disabled">
+      <div class="tag">晚鸟票 · 女生</div>
+      <div class="row"><div class="price">$49.99 <small>/ 人</small></div><span class="buy">11 月 6 日起开放</span></div>
+      <div class="desc">11 月 6 日起开放购买。</div>
+    </div>
+
+    <div class="ticket disabled">
+      <div class="tag">晚鸟票 · 男生</div>
+      <div class="row"><div class="price">$59.99 <small>/ 人</small></div><span class="buy">11 月 6 日起开放</span></div>
+      <div class="desc">11 月 6 日起开放购买。</div>
+    </div>
+
+
+    <p class="includes"><b>结账时可以免费勾选</b>：「后续小型单身圆桌 · 优先邀请」（成为圆桌活动的首批受邀客人）。</p>
+    <div class="trust">
+      <span>Stripe 安全支付</span>
+      <span>买票后7天内且不晚于活动前3天可退票或转让（取更早者）</span>
+      <span>电子票活动前 5 天内发出</span>
+      <span>全场限 60 位</span>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kicker">Good To Know</div>
+    <h2 class="sec-title">参加须知</h2>
+    <div class="notes">
+      <p>· 票里含<b>一杯无酒精特调饮料</b>；现场吧台可另购鸡尾酒（需出示 ID）。</p>
+      <p>· 场地：<b>Vermillion Art Gallery and Bar，1508 11th Ave, Seattle 98122</b>。正式邀请函将在<b>活动前 5 天内</b>发到这个邮箱。</p>
+      <p>· 退改：买票后7天内可退票或转让，且最晚不晚于活动开始前3天，取两者中更早的时间；活动开始前3天以内恕不退改。（11月8日活动：最晚11月5日下午3点）</p>
+      <p>· 如场地或日期有变，可<b>免费改期或全额退款</b>，由你决定。</p>
+      <p>· 女生、男生<b>各 30 张票</b>，售罄后开启候补名单。</p>
+      <p>· 正场结束后设有自愿参加的 <b>After Party</b>（续摊），安排当晚公布，去留自由。</p>
+      <p>· 有任何问题，写信到 <a href="mailto:events@glomere.tech">events@glomere.tech</a>。</p>
+    </div>
+  </section>
+
+
+
+  </main>
+
+  <!-- ================= ENGLISH VERSION ================= -->
+  <main id="lang-en" hidden>
+<div class="hero">
+    <span class="badge">Seattle · November Premiere</span>
+    <div class="cn-title en-title">Singles Party</div>
+    <h1>Until We Meet</h1>
+    <p class="en">New People · Bold Conversations<br>Unexpected Connections</p>
+    <div class="meta">
+      <span class="hot">Sun, Nov 8 · 3:00 – 6:00 PM</span>
+      <span>Optional After Party · Stay on if you'd like</span>
+      <span>Vermillion Art Gallery and Bar · Seattle</span>
+      <span>Ages 26 – 37</span>
+      <span>Women · Men — 30 tickets each</span>
+    </div>
+  </div>
+
+  <div class="orn">✦</div>
+
+  <div class="art reveal">
+    <img src="/events-poster-en.webp" alt="Until We Meet poster: young people talking at a rooftop gathering at dusk, with the Seattle skyline and the Space Needle in the distance">
+  </div>
+
+  <section class="reveal">
+    <div class="sec-kicker">The Afternoon</div>
+    <h2 class="sec-title" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700">What the Afternoon Includes</h2>
+    <p class="sec-sub">This afternoon, in the dim, exquisite art space of Vermillion Art Gallery and Bar (1508 11th Ave, Seattle 98122), you will hold a zero-proof specialty drink and meet new people naturally amid the laughter of curated bites, icebreaker bingo, and interactive performances. Stickers signal each person’s dating intention, so intentions are clear at a glance. No speed-dating rotations, no forced small talk — move freely, talk freely, all afternoon — and close with a Heart Code, leaving a touch of mystery lingering over the afternoon. Cocktails are available for purchase at the on-site bar (ID required).</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16l-8 9z"/><path d="M12 13v7"/><path d="M8 20h8"/></svg>
+        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px">Specialty Drink · Curated Bites</h3><p>Every ticket includes one non-alcoholic specialty drink, and curated bites are served all night — graze while you mingle. Cocktails are available for purchase at the on-site bar (ID required).</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.2" cy="8.2" r="1.3" fill="currentColor"/><circle cx="15.8" cy="15.8" r="1.3" fill="currentColor"/><circle cx="15.8" cy="8.2" r="1.3" fill="currentColor"/><circle cx="8.2" cy="15.8" r="1.3" fill="currentColor"/></svg>
+        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px">Icebreaker Bingo</h3><p>Everyone gets a bingo card: small prompts that walk you up to new people, points for each one you complete, and a prize for the top score. Your heart sticker states your intention up front, so starting a conversation takes no guessing.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/></svg>
+        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px">Interactive Performance</h3><p>Short live performances woven between the conversations, so the energy never dips.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px">Heart Code</h3><p>Write what you wanted to say — or the note you'd like to leave — for that one person, encode it in Morse, and drop it into the Heart Code box. After the event, we pass it to them together with your contact. Or don't write one. That's fine too.</p>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin-top:18px"><b style="color:var(--gold-hi)">Viral egg tarts · delicate snacks · one non-alcoholic specialty drink · Seattle stand-up comedians, and more surprises waiting for you.</b></p>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kicker">How It Works</div>
+    <h2 class="sec-title" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700">How It Works</h2>
+    <p class="sec-sub">Three steps, zero threshold. Everything is designed to make starting a conversation easy — and declining one, graceful.</p>
+    <div class="step">
+      <div class="num">1</div>
+      <div><h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:21px">Wear your heart sticker</h3><p>At check-in you get a name tag and a number, then pick a heart sticker to state your intention: a white heart — just here to make friends; a pink heart — open to a romantic connection; a red heart — seriously looking for a life partner. Intentions read at a glance, and conversations start easy.</p></div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div><h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:21px">Play, and collect points</h3><p>Drink in hand, move freely and use the prompts on your bingo card to meet new people. Each completed prompt earns 1 point, and prizes go to the top scores at the end of the night.</p></div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div><h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:21px">Heart Code (optional)</h3><p>Write what you'd like to say to that person, encode their number in Morse ( · — · — ), add your contact, and drop it into the Heart Code box. After the event, we deliver your message and your contact to them. It is an option, never a step you have to take.</p></div>
+    </div>
+    <div class="flourish">We bond people in unprecedented ways</div>
+    <div class="sec-kicker" style="margin-top:26px">Dress Code</div>
+    <h2 class="sec-title" style="font-size:22px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700">Suggested Palette</h2>
+    <div class="dress">
+      <div><div class="sw" style="background:#26221f"></div><div class="cap">Black</div></div>
+      <div><div class="sw" style="background:#fbfaf6"></div><div class="cap">White</div></div>
+      <div><div class="sw" style="background:#9b968e"></div><div class="cap">Grey</div></div>
+      <div><div class="sw" style="background:#d79aa3"></div><div class="cap">Pink</div></div>
+      <div><div class="sw" style="background:#7a1e2b"></div><div class="cap">Burgundy</div></div>
+      <div><div class="sw" style="background:#8a5a3b"></div><div class="cap">Brown</div></div>
+    </div>
+    <p class="dress-note">Dress code, suggested palette: black, white, grey, pink, burgundy, brown.</p>
+  </section>
+
+  <section class="reveal" id="tickets-en" style="scroll-margin-top:16px">
+    <div class="sec-kicker">Tickets</div>
+    <h2 class="sec-title" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700">Tickets</h2>
+    <p class="sec-sub">Every ticket includes: <b style="color:var(--gold-hi)">one non-alcoholic specialty drink · curated bites · all games and performances · the Heart Code</b>. Tap a ticket to continue to the secure payment page.</p>
+    <p class="sec-sub" style="color:var(--gold-hi)"><b>Early Bird Extended: early-bird pricing extended to Nov 5; late-bird tickets open Nov 6.</b></p>
+
+    <a class="ticket featured" href="/register?tier=early&gender=female">
+      <div class="tag">Early Bird · Women</div>
+      <div class="row"><div class="price">$39.99 <small>/ person</small></div><span class="buy">Register with your info →</span></div>
+      <div class="desc">Early-bird price for the November premiere. <s>Closes Nov 1.</s> Extended to Nov 5.</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=early&gender=male">
+      <div class="tag">Early Bird · Men</div>
+      <div class="row"><div class="price">$49.99 <small>/ person</small></div><span class="buy">Register with your info →</span></div>
+      <div class="desc">Early-bird price for the November premiere. <s>Closes Nov 1.</s> Extended to Nov 5.</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=bundle&gender=female">
+      <span class="save">Save $13.98</span>
+      <div class="tag">Besties Bundle · 2 Women</div>
+      <div class="row"><div class="price">$66 <small>/ two guests</small></div><span class="buy">Register with your info →</span></div>
+      <div class="desc">Come with your best friend: two women registering together, $33 each, counted within the 30 women's tickets.</div>
+    </a>
+
+    <a class="ticket featured" href="/register?tier=bundle&gender=male">
+      <span class="save">Save $19.98</span>
+      <div class="tag">Bros Bundle · 2 Men</div>
+      <div class="row"><div class="price">$80 <small>/ two guests</small></div><span class="buy">Register with your info →</span></div>
+      <div class="desc">Come with your buddy: two men registering together, $40 each, counted within the 30 men's tickets.</div>
+    </a>
+
+    <div class="ticket disabled">
+      <div class="tag">Late Bird · Women</div>
+      <div class="row"><div class="price">$49.99 <small>/ person</small></div><span class="buy">Opens Nov 6</span></div>
+      <div class="desc">On sale from Nov 6.</div>
+    </div>
+
+    <div class="ticket disabled">
+      <div class="tag">Late Bird · Men</div>
+      <div class="row"><div class="price">$59.99 <small>/ person</small></div><span class="buy">Opens Nov 6</span></div>
+      <div class="desc">On sale from Nov 6.</div>
+    </div>
+
+    <p class="includes"><b>Free at checkout:</b> check the box for “Small Singles Roundtables · Priority Invitations” and be among the first invited to future roundtable events.</p>
+    <div class="trust">
+      <span>Secure payment by Stripe</span>
+      <span>Refunds or transfers within 7 days after purchase and no later than 3 days before the event</span>
+      <span>E-tickets sent within 5 days before the event</span>
+      <span>Limited to 60 guests</span>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kicker">Good To Know</div>
+    <h2 class="sec-title" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700">Good to Know</h2>
+    <div class="notes">
+      <p>· Your ticket includes <b>one non-alcoholic specialty drink</b>; cocktails are available for purchase at the on-site bar (ID required).</p>
+      <p>· The venue is <b>Vermillion Art Gallery and Bar, 1508 11th Ave, Seattle 98122</b>. Your official invitation arrives by email <b>within 5 days before the event</b>.</p>
+      <p>· Refunds &amp; transfers: within <b>7 days after purchase and no later than 3 days before</b> the event starts, whichever comes first; no changes within 3 days before the event. (Nov 8 event: latest Nov 5, 3:00 PM Pacific)</p>
+      <p>· If the venue or date changes, choose a <b>free reschedule or a full refund</b> — your call.</p>
+      <p>· <b>30 tickets for women and 30 for men</b>; a waitlist opens once they sell out.</p>
+      <p>· An optional <b>After Party</b> follows the main event, announced that night. Stay or leave as you like.</p>
+      <p>· Questions? Write to <a href="mailto:events@glomere.tech">events@glomere.tech</a>.</p>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <div class="flogo">GLOMERE</div>
+    <div class="ftag">We bond people in unprecedented ways.</div>
+    <p>glomere.tech · Glomere Inc. · Seattle, WA<br><span data-zh="联系我们：" data-en="Contact: ">联系我们：</span><a href="mailto:hello@glomere.tech">hello@glomere.tech</a></p>
+  </footer>
+
+</div>
+
+<div class="sticky-cta">
+  <div class="sc-t" id="cta-zh"><b>早鸟票 · 11月首发</b>女生 $39.99 · 男生 $49.99 · 早鸟至 11 月 5 日</div>
+  <div class="sc-t" id="cta-en" hidden><b>Early Bird · November Premiere</b>Women $39.99 · Men $49.99 · Early bird ends Nov 5</div>
+  <a href="#tickets" id="cta-btn" data-zh="立即报名 →" data-en="Register →">立即报名 →</a>
+</div>
+<script>
+function setLang(l){
+  var zh = (l === 'zh');
+  document.getElementById('lang-zh').hidden = !zh;
+  document.getElementById('lang-en').hidden = zh;
+  document.getElementById('cta-zh').hidden = !zh;
+  document.getElementById('cta-en').hidden = zh;
+  document.getElementById('btn-zh').classList.toggle('on', zh);
+  document.getElementById('btn-en').classList.toggle('on', !zh);
+  document.getElementById('cta-btn').setAttribute('href', zh ? '#tickets' : '#tickets-en');
+  document.documentElement.lang = zh ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-zh]').forEach(function(el){
+    el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+  });
+  try { localStorage.setItem('glomere-lang', l); } catch(e) {}
+}
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem('glomere-lang'); } catch(e) {}
+  if (saved) { setLang(saved); return; }
+  setLang('zh');
+})();
+</script>
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.08 });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>

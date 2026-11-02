@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>报名 · 西雅图单身派对 · Glomere</title>
+<meta name="description" content="Glomere 西雅图单身派对报名：填写报名信息并同意活动条款后完成购票。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+SC:wght@600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#ece1c6; --cream:#2e2115; --cream-soft:#6d5836; --muted:#a68d5f;
+--gold:#c9a24b; --gold-hi:#a37e22; --wine:#a63a46; --wine-deep:#7a1e2b;
+--line:rgba(154,116,31,.30); --field:rgba(255,255,255,.65);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--cream);background:var(--bg);-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;min-height:100vh;background:
+radial-gradient(120% 40% at 85% 0%,rgba(201,162,75,.18),transparent 55%),
+linear-gradient(180deg,#fffdf6 0%,#fbf4e1 48%,#f7edd3 100%);
+box-shadow:0 0 60px rgba(122,94,32,.18)}
+a{color:inherit}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;font-weight:700;letter-spacing:.34em;color:var(--cream);text-decoration:none}
+.logo small{display:block;font-size:8.5px;letter-spacing:.56em;color:var(--gold);font-weight:600;margin-top:1px}
+nav .links a{text-decoration:none;color:var(--cream-soft);font-weight:500;font-size:14px}
+main{padding:38px 28px 50px}
+.kicker{text-align:center;letter-spacing:.34em;font-size:10.5px;font-weight:600;color:var(--gold);text-transform:uppercase}
+h1{font-family:'Noto Serif SC','Songti SC',serif;font-size:28px;font-weight:700;text-align:center;margin:10px 0 8px}
+.sub{text-align:center;color:var(--cream-soft);font-size:14px;line-height:1.9;max-width:440px;margin:0 auto 8px}
+.ticket-line{margin:22px auto 4px;max-width:440px;text-align:center;border:1.5px solid var(--gold);border-radius:14px;padding:14px 18px;background:linear-gradient(180deg,rgba(201,162,75,.16),rgba(201,162,75,.05));font-size:15px}
+.ticket-line b{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;color:var(--cream)}
+form{max-width:440px;margin:26px auto 0}
+.f{margin-bottom:18px}
+.f label.lab{display:block;font-size:13.5px;font-weight:600;color:var(--cream);margin-bottom:8px;letter-spacing:.04em}
+.f input[type=text],.f input[type=email],.f input[type=number],.f select{width:100%;background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15.5px;color:var(--cream);font-family:inherit;outline:none}
+.f input:focus,.f select:focus{border-color:var(--gold-hi)}
+.f input::placeholder{color:#b3a077}
+.radios{display:flex;gap:10px;flex-wrap:wrap}
+.radios label{flex:1;min-width:96px;text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:12px 8px;font-size:14.5px;color:var(--cream-soft);cursor:pointer;background:var(--field)}
+.radios input{display:none}
+.radios label:has(input:checked){border-color:var(--gold-hi);color:var(--cream);background:rgba(201,162,75,.16);font-weight:600}
+.terms{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px;background:var(--field);font-size:13.5px;line-height:1.8;color:var(--cream-soft)}
+.terms input{margin-top:4px;width:17px;height:17px;accent-color:var(--wine);flex:0 0 auto}
+.terms a{color:var(--gold-hi);font-weight:600;text-decoration:none}
+.err{display:none;color:#b3342a;font-size:13.5px;margin:12px 0 0;line-height:1.7}
+button{width:100%;margin-top:22px;background:linear-gradient(120deg,var(--wine),var(--wine-deep));color:#fdf3e3;font-size:16px;font-weight:600;padding:15px;border:none;border-radius:999px;cursor:pointer;font-family:inherit}
+button:disabled{opacity:.6}
+.note{text-align:center;font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:14px}
+.terms-sec{max-width:440px;margin:38px auto 0;border-top:1px solid var(--line);padding-top:26px}
+.terms-sec h2{font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;text-align:center;color:var(--cream)}
+.terms-sec .tsub{text-align:center;font-size:12.5px;color:var(--muted);margin:8px 0 18px;line-height:1.8}
+.terms-sec p{font-size:13px;color:var(--cream-soft);line-height:1.95;margin-bottom:12px;text-align:left}
+.terms-sec p b{color:var(--cream)}
+.terms-sec a{color:var(--gold-hi);font-weight:600;text-decoration:none}
+footer{padding:10px 28px 40px;text-align:center}
+footer p{font-size:12.5px;color:var(--muted);line-height:1.9}
+footer a{color:var(--gold-hi);text-decoration:none;font-weight:600}
+@media (max-width:520px){ html,body{overflow-x:hidden} main{padding:32px 20px 44px} nav{padding:16px 16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="/">GLOMERE<small>EXPERIENCE LAB</small></a>
+    <div class="links"><a href="/events">← 返回活动页</a></div>
+  </nav>
+
+  <main>
+    <div class="kicker">Registration</div>
+    <h1>报名信息</h1>
+    <p class="sub">Until We Meet · 西雅图单身派对 · 11/8 周日 3:00 – 6:00 PM<br>先填写报名信息，提交后跳转到安全支付页完成购票。</p>
+    <div class="ticket-line">你选择的票：<b id="ticketName">早鸟票</b></div>
+
+    <p class="note" id="bundleNote" style="display:none">套票含两位名额。</p>
+
+    <form id="regForm" novalidate>
+      <div class="f" id="roleField" style="display:none">
+        <label class="lab">意向岗位（志愿者）</label>
+        <div class="radios">
+          <label><input type="radio" name="vrole" value="摄影">摄影</label>
+          <label><input type="radio" name="vrole" value="统筹协调">统筹协调</label>
+          <label><input type="radio" name="vrole" value="餐饮协助">餐饮协助</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab" for="name">姓名</label>
+        <input type="text" id="name" placeholder="你的名字" autocomplete="name">
+      </div>
+      <div class="f">
+        <label class="lab" for="email">邮箱</label>
+        <input type="email" id="email" placeholder="电子门票和活动通知会发到这里" autocomplete="email">
+      </div>
+      <div class="f">
+        <label class="lab" for="wechat">微信号（方便活动通知）</label>
+        <input type="text" id="wechat" placeholder="活动前会通过微信联系你（选填）">
+      </div>
+      <div class="f">
+        <label class="lab" for="job">职业</label>
+        <input type="text" id="job" placeholder="例如：软件工程师 / 设计师 / 学生">
+      </div>
+      <div class="f">
+        <label class="lab">性别</label>
+        <div class="radios">
+          <label><input type="radio" name="gender" value="female">女生</label>
+          <label><input type="radio" name="gender" value="male">男生</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab">性向（选填）</label>
+        <div class="radios">
+          <label><input type="checkbox" name="orientation" value="喜欢男生">喜欢男生</label>
+          <label><input type="checkbox" name="orientation" value="喜欢女生">喜欢女生</label>
+        </div>
+      </div>
+      <div class="f">
+        <label class="lab" for="age">年龄</label>
+        <input type="number" id="age" min="18" max="99" placeholder="本场活动面向 26 – 37 岁">
+      </div>
+      <div class="f">
+        <label class="lab" for="diet">饮食禁忌 / 过敏（选填）</label>
+        <input type="text" id="diet" placeholder="例如：坚果过敏、素食、无麸质…没有可不填">
+      </div>
+      <div class="f">
+        <label class="lab" for="speaksChinese">你会说中文吗？Do you speak Chinese?（仅供主办方参考 · Just for host information）</label>
+        <select id="speaksChinese">
+          <option value="">请选择 / Please select</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="f">
+        <label class="lab">交友意图</label>
+        <div class="radios">
+          <label><input type="radio" name="intent" value="交朋友">交朋友</label>
+          <label><input type="radio" name="intent" value="恋爱">恋爱</label>
+          <label><input type="radio" name="intent" value="人生队友">人生队友</label>
+        </div>
+      </div>
+      <div class="terms">
+        <input type="checkbox" id="agree">
+        <span>我已阅读并同意 <a href="#terms">《报名条款与免责声明》</a>（见本页下方），包括：现场饮酒的相关说明、自愿社交原则、主办方不负责活动后续联系，以及现场照片可能用于活动回顾；如强烈反对照片被使用，我会联系主办方。</span>
+      </div>
+      <p class="err" id="err"></p>
+      <div id="doneBox" style="display:none;text-align:center;border:1.5px solid var(--gold);border-radius:14px;padding:20px 18px;background:linear-gradient(180deg,rgba(201,162,75,.16),rgba(201,162,75,.05));font-size:15px;line-height:1.9">
+        <b style="font-size:17px">报名收到，谢谢你！</b><br>志愿者无需付款，我们会在活动前通过邮箱联系你，确认岗位分工。
+      </div>
+      <button type="submit" id="submitBtn">提交并前往付款 →</button>
+      <p class="note">报名信息只用于本场活动的安排与联系，不会出售或用于其他用途。<br>付款在 Stripe 安全支付页完成。</p>
+    </form>
+
+    <section class="terms-sec" id="terms">
+      <h2>报名条款与免责声明</h2>
+      <p class="tsub">报名购票前请阅读以下条款。完成购票即视为你已阅读、理解并同意全部内容。</p>
+      <p><b>年龄与饮酒。</b>本活动建议参与年龄为 26 – 37 岁；年满 21 岁即可入场，年满 21 岁方可饮酒。报名时填写的年龄与职业均为参与者自行申报，主办方不做核验。现场饮酒纯属自愿，请根据自身情况量力而行、理性饮酒；因个人饮酒产生的任何后果由参与者自行承担。主办方有权停止向明显醉酒或身体不适的参与者提供酒水；购酒时请出示带照片的有效 ID。请勿酒后驾车，建议提前安排代驾或拼车。</p>
+      <p><b>语言。</b>本场活动的表演环节以中文为主；不会中文的朋友同样欢迎参加。</p>
+      <p><b>自愿社交。</b>本活动为自愿参加的社交活动。你与其他参与者的一切交流与接触均出于双方自愿；请尊重每一位参与者的意愿与个人边界，任何人都有权在任何时候拒绝或终止交流，且无需给出理由。</p>
+      <p><b>活动后续。</b>是否交换联系方式、是否在活动后继续联系，完全由参与者个人决定。活动结束后参与者之间的一切联系、交往与行为均属个人行为，与主办方无关；主办方不对活动之后发生的任何互动、关系或纠纷承担责任。</p>
+      <p><b>拍摄与照片使用。</b>活动现场主办方（或主办方委托的摄影师）会拍摄照片及短视频，用于本活动的回顾总结（event summary），以及 Glomere 官方网站与社交媒体的活动记录与宣传。购票参加即表示你同意在上述范围内使用包含你肖像的素材。如你强烈反对自己的照片被拍摄或使用，请在活动前或活动后通过 <a href="mailto:events@glomere.tech">events@glomere.tech</a> 联系主办方，我们会尽量避免拍摄你，并对已发布的素材做删除或打码处理。</p>
+      <p><b>其他。</b>请自行保管个人财物，遗失损坏主办方不承担保管责任。参与者应对自身行为负责；主办方保留现场最终裁量权：如有扰乱活动秩序、破坏活动氛围、令他人明显不适，或明显超出建议年龄范围，主办方有权请其离场，且票款不予退还。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>有任何问题，写信到 <a href="mailto:events@glomere.tech">events@glomere.tech</a></p>
+  </footer>
+
+</div>
+<script>
+var pageLang = (function () { try { var q0 = new URLSearchParams(location.search).get("lang"); var s0 = q0 || localStorage.getItem("glomere-lang") || "zh"; return String(s0).toLowerCase().indexOf("en") === 0 ? "en" : "zh"; } catch (e) { return "zh"; } })();
+var LINKS_ZH = {
+  early: { female: "https://buy.stripe.com/7sY4gz93q3D14SsfT04sE05", male: "https://buy.stripe.com/00weVd2F2ddBckUbCK4sE08" },
+  late:  { female: "https://buy.stripe.com/8x27sLbby3D10Cc0Y64sE06", male: "https://buy.stripe.com/3cI4gz1AYc9xckUfT04sE0e" },
+  bundle: { female: "https://buy.stripe.com/9B67sL7Zmc9x4SscGO4sE04", male: "https://buy.stripe.com/7sY28rfrOgpNfx6gX44sE07" }
+};
+var LINKS_EN = {
+  early: { female: "https://buy.stripe.com/9B600j6Vi0qP0Cc0Y64sE00", male: "https://buy.stripe.com/8x29ATgvSc9x0Cc4ai4sE01" },
+  late:  { female: "https://buy.stripe.com/bJedR94Naa1p5Ww4ai4sE0d", male: "https://buy.stripe.com/9B6bJ10wU0qP4Ss6iq4sE0f" },
+  bundle: { female: "https://buy.stripe.com/bJe14n4Nab5t2Kk4ai4sE02", male: "https://buy.stripe.com/9B6eVd2F25L9acM8qy4sE03" }
+};
+var LINKS = (pageLang === "en") ? LINKS_EN : LINKS_ZH;
+var PRICES = {
+  early: { female: "$39.99", male: "$49.99" },
+  late: { female: "$49.99", male: "$59.99" },
+  bundle: { female: "$66", male: "$80" }
+};
+var NAMES = { early: "早鸟票", late: "晚鸟票" };
+var q = new URLSearchParams(location.search);
+var tier = (q.get("tier") === "late") ? "late" : (q.get("tier") === "bundle") ? "bundle" : (q.get("tier") === "volunteer") ? "volunteer" : "early";
+var preGender = q.get("gender");
+function ticketLabel() {
+  var g = document.querySelector('input[name="gender"]:checked');
+  var gv = g ? g.value : null;
+  if (tier === "volunteer") return "志愿者票 · 免费参与 $0";
+  if (tier === "bundle") return (gv === "male" ? "兄弟套票" : "闺蜜套票") + (gv ? " " + PRICES.bundle[gv] : "");
+  var gName = gv ? (gv === "female" ? " · 女生" : " · 男生") : "";
+  return NAMES[tier] + gName + (gv ? " " + PRICES[tier][gv] : "");
+}
+function syncTicketLine() {
+  document.getElementById("ticketName").textContent = ticketLabel();
+  document.getElementById("bundleNote").style.display = (tier === "bundle") ? "block" : "none";
+  document.getElementById("roleField").style.display = (tier === "volunteer") ? "block" : "none";
+  if (tier === "volunteer") document.getElementById("submitBtn").textContent = "提交报名 →";
+}
+if (preGender === "female" || preGender === "male") {
+  document.querySelector('input[name="gender"][value="' + preGender + '"]').checked = true;
+}
+document.querySelectorAll('input[name="gender"]').forEach(function (r) { r.addEventListener("change", syncTicketLine); });
+syncTicketLine();
+
+document.getElementById("regForm").addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  var err = document.getElementById("err");
+  function fail(msg) { err.textContent = msg; err.style.display = "block"; err.scrollIntoView({behavior:"smooth", block:"center"}); }
+  if (tier === "volunteer") return fail("志愿者名额已满，感谢关注，欢迎以普通门票报名参加。");
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var wechat = document.getElementById("wechat").value.trim();
+  var job = document.getElementById("job").value.trim();
+  var gEl = document.querySelector('input[name="gender"]:checked');
+  var age = parseInt(document.getElementById("age").value, 10);
+  var iEl = document.querySelector('input[name="intent"]:checked');
+  var oEls = document.querySelectorAll('input[name="orientation"]:checked');
+  var agree = document.getElementById("agree").checked;
+  if (!name) return fail("请填写姓名。");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("请填写有效的邮箱，电子门票会发到这个邮箱。");
+  if (!job) return fail("请填写职业。");
+  if (!gEl) return fail("请选择性别（女生 / 男生票数分开计算）。");
+  if (!age || isNaN(age)) return fail("请填写年龄。");
+  if (age < 26 || age > 37) return fail("本场活动面向 26 – 37 岁，年龄不在范围内暂时无法报名这一场，欢迎关注 Glomere 的其他主题活动。");
+  if (!iEl) return fail("请选择交友意图。");
+  var roleEl = document.querySelector('input[name="vrole"]:checked');
+  if (tier === "volunteer" && !roleEl) return fail("请选择意向岗位（摄影 / 统筹协调 / 餐饮协助）。");
+  if (!agree) return fail("请先阅读并勾选同意《报名条款与免责声明》。");
+  err.style.display = "none";
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "正在提交…";
+  var speaksChinese = document.getElementById("speaksChinese").value || "未填";
+  var target = (tier === "volunteer") ? null : LINKS[tier][gEl.value];
+  var payRef = (tier === "volunteer") ? null : (function () { try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {} return "pay_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); })();
+  var payload = {
+    "ticket_tier": tier,
+    "ticket_label": ticketLabel(),
+    "role": roleEl ? roleEl.value : null,
+    "name": name,
+    "email": email,
+    "wechat": wechat,
+    "job": job,
+    "gender": gEl.value === "female" ? "女生" : "男生",
+    "age": age,
+    "intent": iEl.value,
+    "diet": document.getElementById("diet").value.trim() || "无",
+    "orientation": oEls.length ? Array.prototype.map.call(oEls, function (el) { return el.value; }).join("、") : "未填",
+    "speaks_chinese": speaksChinese,
+    "agreed": true,
+    "pay_ref": payRef,
+    "payment_url": target,
+    "lang": (function () { try { var q = new URLSearchParams(location.search).get("lang"); var s = q || localStorage.getItem("glomere-lang") || "zh"; return String(s).toLowerCase().indexOf("en") === 0 ? "en" : "zh"; } catch (e) { return "zh"; } })()
+  };
+  function proceed() {
+    if (tier === "volunteer") {
+      btn.style.display = "none";
+      document.getElementById("doneBox").style.display = "block";
+      document.getElementById("doneBox").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (!target) {
+      btn.disabled = false; btn.textContent = "提交并前往付款 →";
+      fail("支付通道正在更新中，你的报名信息已经留下了——请写信到 events@glomere.tech 锁定名额，我们会把付款链接直接发给你。");
+      return;
+    }
+    window.location.href = target + "?prefilled_email=" + encodeURIComponent(email) + "&client_reference_id=" + encodeURIComponent(payRef);
+  }
+  function postPayload(p) {
+    return fetch("https://jlvlmuyegirglbyrnfbl.supabase.co/rest/v1/glomere_registrations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "sb_publishable_9o7Xw_nHYbbl6065PWzOIg_cSVlbdBY",
+        "Authorization": "Bearer sb_publishable_9o7Xw_nHYbbl6065PWzOIg_cSVlbdBY",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(p)
+    }).then(function (r) { return r.ok ? "ok" : "http"; }).catch(function () { return "net"; });
+  }
+  var send = postPayload(payload).then(function (res) { return res === "ok"; });
+  var timeout = new Promise(function (r) { setTimeout(function () { r("timeout"); }, 6000); });
+  Promise.race([send, timeout]).then(function (res) {
+    if (res === true || res === "timeout") { proceed(); return; }
+    btn.disabled = false; btn.textContent = "提交报名 →";
+    fail("提交没有成功，请检查网络后重试一次；如果还是不行，请直接写信到 events@glomere.tech 报名。");
+  });
+});
+</script>
+</body>
+</html>
