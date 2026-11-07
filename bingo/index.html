@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>现场宾果游戏 · Live Bingo Game</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:#faf6ee;color:#1c2430;max-width:560px;margin:0 auto;padding:20px 16px 48px;line-height:1.6}
+  .kicker{font-size:12px;letter-spacing:2px;color:#8a6d1d;font-weight:700;text-transform:uppercase}
+  h1{font-size:28px;line-height:1.2;margin:6px 0 4px}
+  .meta{font-size:14px;color:#666}
+  .banner{background:#1c2430;color:#f7f3ea;border-radius:16px;padding:16px;font-size:15px;margin:16px 0;box-shadow:0 4px 16px rgba(28,36,48,.12)}
+  .banner b{color:#e8b4c8}
+  .demo{background:#fff3cd;border:1px solid #e6c87a;border-radius:14px;padding:12px 14px;font-size:13px;margin:12px 0}
+  .tabs{display:flex;gap:10px;margin:20px 0}
+  .tabs button{flex:1;min-height:48px;padding:12px 8px;border:1px solid #e5ddd0;background:#fff;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(28,36,48,.06)}
+  .tabs button.on{background:#1c2430;color:#fff;border-color:#1c2430}
+  .themes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+  .themes button{min-height:64px;padding:14px 10px;border:2px solid #e8ddc8;background:#fff;border-radius:16px;font-size:15px;font-weight:700;cursor:pointer;line-height:1.3;box-shadow:0 2px 8px rgba(28,36,48,.05)}
+  .themes button small{display:block;font-weight:400;font-size:12px;color:#666;margin-top:2px}
+  .themes button.on{background:#1c2430;color:#fff;border-color:#1c2430}
+  .themes button.on small{color:#ddd}
+  .score{display:flex;gap:10px;margin:16px 0}
+  .stat{flex:1;background:#fff;border:1px solid #eee;border-radius:16px;padding:14px 8px;text-align:center;box-shadow:0 2px 8px rgba(28,36,48,.05)}
+  .stat b{font-size:22px;display:block}
+  .stat span{font-size:12px;color:#666}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .cell{min-height:124px;background:#fff;border:2px solid #e8ddc8;border-radius:18px;padding:12px 8px;text-align:center;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:6px;box-shadow:0 3px 10px rgba(28,36,48,.06)}
+  .cell.filled{background:#fdeef3;border-color:#d98aa5}
+  .cell .trait{font-size:16px;font-weight:800;line-height:1.3}
+  .cell .zh{font-size:13px;color:#888}
+  .cell .num{width:48px;height:48px;border-radius:50%;background:#c9a24b;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto;font-weight:800;font-size:19px}
+  .cell small{font-size:11px;color:#888}
+  select,input,textarea{width:100%;min-height:48px;padding:12px;border:1px solid #ddd;border-radius:14px;font-size:16px;background:#fff}
+  label{font-size:14px;font-weight:700;display:block;margin:16px 0 6px}
+  .btn{width:100%;min-height:52px;padding:14px;border:0;border-radius:14px;background:#c9a24b;color:#fff;font-size:17px;font-weight:800;cursor:pointer;margin-top:16px;box-shadow:0 4px 12px rgba(201,162,75,.35)}
+  .btn.dark{background:#1c2430}
+  .btn.ghost{background:#fff;color:#1c2430;border:1px solid #ddd;box-shadow:none}
+  .boardrow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #eee;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(28,36,48,.05)}
+  .rank{width:28px;height:28px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+  .rank.top{background:#c9a24b;color:#fff}
+  .frozen{background:#fdeef3;border:1px solid #d98aa5;border-radius:10px;padding:10px 12px;font-size:14px;margin:12px 0;text-align:center}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:10}
+  .modal.open{display:flex}
+  .sheet{background:#fff;width:100%;max-width:560px;max-height:82vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px}
+  .person{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#faf6ee;border:1px solid #eee;border-radius:10px;padding:10px;margin-bottom:8px;cursor:pointer}
+  .person .num{width:46px;height:46px;border-radius:50%;background:#c9a24b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0}
+  .note{font-size:13px;color:#666;margin-top:10px}
+  .traitgroup{margin:10px 0}
+  .traitgroup b{font-size:13px}
+  .traitcheck{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .traitcheck label{font-weight:400;font-size:13px;background:#fff;border:1px solid #ddd;border-radius:20px;padding:6px 10px;cursor:pointer;margin:0}
+  .traitcheck input{width:auto;margin-right:4px}
+  .livebox{background:#fff;border:2px solid #c9a24b;border-radius:18px;padding:16px;text-align:center;margin:16px 0;box-shadow:0 4px 14px rgba(201,162,75,.18)}
+  .livebox b{font-size:20px;display:block;line-height:1.25}
+  .livebox span{font-size:13px;color:#666}
+  .hidden{display:none}
+  details.more{margin:16px 0}
+  details.more summary{font-size:13px;color:#8a6d1d;font-weight:700;cursor:pointer}
+  details.more p{font-size:13px;color:#666;margin-top:8px}
+  .countdown-window{background:#1c2430;color:#f7f3ea;border-radius:16px;padding:14px 16px;text-align:center;margin:0 0 14px;box-shadow:0 4px 16px rgba(28,36,48,.12)}
+  .countdown-window b{font-size:22px;line-height:1.25}
+  .langtoggle{display:flex;gap:8px;justify-content:flex-end;margin-bottom:12px}
+  .langtoggle button{min-height:44px;padding:10px 20px;border:2px solid #c9a24b;background:#fff;border-radius:22px;font-size:15px;font-weight:800;cursor:pointer}
+  .langtoggle button.on{background:#1c2430;color:#fff;border-color:#1c2430}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="countdown-window"><b id="countdown">宾果倒计时：—</b></div>
+  <div class="langtoggle"><button id="langZh" class="on" onclick="setLang('zh')">中文</button><button id="langEn" onclick="setLang('en')">EN</button></div>
+  <div class="kicker" id="kicker">Glomere · Until We Meet</div>
+  <h1 id="mainTitle">现场宾果游戏</h1>
+
+
+
+  <h2 id="chooseGameH2" style="font-size:17px;margin:16px 0 4px">选一个游戏</h2>
+  <p class="note" id="chooseGameNote" style="margin-top:0">换主题 = 换一张新卡片。</p>
+  <div class="themes" id="themes"></div>
+  <p class="note" id="themeDesc"></p>
+
+  <label for="guestNum" id="lblNum">1. 你的嘉宾号码</label>
+  <input id="guestNum" type="number" min="1" max="99" inputmode="numeric" placeholder="例如：12">
+  <label for="guestName" id="lblName">2. 你的名字或昵称</label>
+  <input id="guestName" type="text" maxlength="20" placeholder="例如：小美">
+  <label for="mbtiSelect" id="lblMbti">3. 你的 MBTI 类型</label>
+  <select id="mbtiSelect">
+    <option value="">还不知道</option>
+    <option>ENFP</option><option>ENFJ</option><option>ENTP</option><option>ENTJ</option>
+    <option>INFP</option><option>INFJ</option><option>INTP</option><option>INTJ</option>
+    <option>ESFP</option><option>ESFJ</option><option>ESTP</option><option>ESTJ</option>
+    <option>ISFP</option><option>ISFJ</option><option>ISTP</option><option>ISTJ</option>
+  </select>
+  <button class="btn" id="saveBtn" onclick="startPlayer()">保存我的资料并开始我的卡片</button>
+  <p class="note" id="youAre"></p>
+  <details class="more"><summary>号码和名字怎么显示？</summary><p id="separateNote">号码和名字分开输入。实时榜显示号码 + 名字或昵称；卡片上只填号码，不显示照片和全名。</p></details>
+
+  <div class="tabs">
+    <button id="tabPlay" class="on" onclick="showTab('play')">我的卡片</button>
+    <button id="tabBoard" onclick="showTab('board')">实时榜</button>
+    <button id="tabHost" onclick="showTab('host')">主持人</button>
+  </div>
+
+  <div id="viewPlay">
+    <div id="freezeBanner" class="frozen hidden">🏁 棋盘已冻结——不能再填格。最终分数在“实时榜”里。</div>
+    <div class="score">
+      <div class="stat"><b id="score">0</b><span id="pointsLabel">总分</span></div>
+      <div class="stat"><b id="filled">0 / 9</b><span id="filledLabel">已填格</span></div>
+      <div class="stat"><b id="lines">0</b><span id="linesLabel">连线（每条+3）</span></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note" id="cardNote">每格 1 分，连线 +3。跟谁聊过，就填谁的号码，同一个号码可以填多格。换主题也能继续玩，总分累计。</p>
+    <details class="more"><summary>玩法说明</summary><p>3×3 卡片，不能用自己的号码填格。冻结前，点已填的格子可以撤销。心动匹配不在本版本内。</p></details>
+    <button class="btn ghost" id="newCardBtn" onclick="newCard()">换一张本主题的新卡片（会清空已填格）</button>
+  </div>
+
+  <div id="viewBoard" class="hidden">
+    <p class="note" id="boardNote">Leaderboard ranks conversations started, never desirability. Each row shows number + first name or nickname, whatever that guest chose. No match counts, no “most sparked” anything.</p>
+    <div id="board"></div>
+    <p class="note" id="boardManualNote">手动冻结仅限主持人，仅用于测试/彩排，在“主持人”标签页里。它不是计时器。</p>
+  </div>
+
+  <div id="viewHost" class="hidden">
+    <div id="hostLock">
+      <h2 id="hostAccessH2" style="font-size:18px;margin:6px 0">主持人权限</h2>
+      <p class="note" id="hostAccessNote">这个标签页仅限主持人。输入主持人密码可解锁嘉宾名单导入和手动冻结。嘉宾绝不能看到这个密码。</p>
+      <label for="hostCode" id="lblHostCode">主持人密码</label>
+      <input id="hostCode" type="password" inputmode="numeric" placeholder="输入主持人密码">
+      <button class="btn" id="unlockBtn" onclick="unlockHost()">解锁主持人控制</button>
+      <p class="note" id="hostSecurityNote">输入 Lucy 设定的主持人密码。不要分享给嘉宾，也不要写在海报或嘉宾邮件里。在这个单文件页面里，密码写在页面源码中，所以它只是封闭房间的一个简易门槛，不是服务器级安全——正式版需要真正的主持人登录。</p>
+    </div>
+    <div id="hostControls" class="hidden">
+    <h2 id="hostFreezeH2" style="font-size:18px;margin:6px 0">主持人：手动冻结</h2>
+    <p class="note" id="hostFreezeNote">仅用于测试/彩排的手动操作——它不是计时器。</p>
+    <button class="btn dark" onclick="toggleFreeze()" id="freezeBtn">冻结棋盘</button>
+    <button class="btn ghost" id="lockBtn" onclick="lockHost()">锁定主持人控制</button>
+    <h2 id="hostGuestH2" style="font-size:18px;margin:16px 0 6px">主持人：导入真实嘉宾名单</h2>
+    <p class="note" id="hostGuestNote">每行粘贴一位嘉宾：<b>号码，名字或昵称，MBTI，标签</b><br>示例：12，小美，ENFP，bouldering;hotpot;boba;pet;travel;changed</p>
+    <label for="csv" id="lblCsv">嘉宾名单（CSV）</label>
+    <textarea id="csv" rows="6" placeholder="12, Maya, ENFP, bouldering;hotpot;boba;pet;travel;changed&#10;27, Alex, INTJ, ski;tennis;tea;tech;languages;skeptic"></textarea>
+    <button class="btn" id="loadCsvBtn" onclick="loadCsv()">导入这份嘉宾名单</button>
+    <button class="btn ghost" id="resetBtn" onclick="resetDemo()">恢复演示嘉宾</button>
+    <p class="note" id="themeTagsNote">Theme tags — Seattle Life: ski 滑雪, bouldering 抱石, tennis 网球, hiking 徒步, comedy 单口喜剧, kayaking 皮划艇, coffee 咖啡, farmers 农夫市集, running 跑步. Food &amp; Hangouts: hotpot 火锅, boba 奶茶, ktv KTV, dumpling 饺子, spicy 辣, homecooking 家常菜, tea 茶, boardgames 桌游, brunch 早午餐. MBTI: E 外向, I 内向, S 感觉, N 直觉, T 思考, F 情感, J 判断, P 感知, changed MBTI变过, skeptic 不太信MBTI. Life Stories: pet 宠物, travel 旅行, notsde 不是SDE, moved 去年刚来西雅图, languages 会三种语言, marathon 跑过马拉松, instrument 乐器, firsttimer 第一次参加单身活动, rainy 爱雨天.</p>
+    <p class="note" id="importNote">Import rule: a trait only appears on a card if at least 2 guests in the room have it, so there are no dead squares. With a 3×3 card, 9 distinct traits fit cleanly, so no repeats are needed when the pool has 9+ usable traits. MBTI letters come from the guest's MBTI type, not from the tags list.</p>
+    <p class="note" id="identityNote">Identity rule: guests choose a number at check-in, it goes on their name tag, and cards fill by number only. The board then shows number + first name or nickname, whatever the guest chose, so a number you met becomes a person you remember.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal"><div class="sheet">
+    <h2 id="modalTitle" style="font-size:18px">找一个人</h2>
+    <label for="search" id="searchLabel">按号码或名字搜索</label>
+    <input id="search" placeholder="输入号码或名字…" oninput="renderPeople()">
+    <div id="people" style="margin-top:10px"></div>
+    <button class="btn ghost" id="cancelBtn" onclick="closeModal()">取消</button>
+  </div></div>
+
+<script>
+// LIVE ARCHITECTURE — LOCKED Nov 3, do not change without Lucy:
+// When this game goes live, sync MUST be WebSocket via Supabase Realtime:
+// one persistent socket per phone, subscribed to the event channel, server
+// pushes fills, profiles, and freeze changes. The countdown is display-only:
+// Bingo starts at opening (15:30 PT, Nov 8), the leaderboard is live,
+// and it freezes hard at 17:30 PT on Nov 8 (2026-11-09 01:30:00 UTC).
+// NOT polling, NOT manual refresh. Refetch on reconnect only, to recover missed events.
+// This demo file is local-only until that wiring is done.
+
+// LIVE WIRING — Supabase Realtime (WebSocket, not polling, not manual refresh).
+// Uses the publishable key only, as intended for browser use.
+// Policies in supabase-live-policies.sql allow anon read/insert for these four
+// bingo tables only, for this event.
+const SUPABASE_URL = "https://jlvlmuyegirglbyrnfbl.supabase.co";
+const SUPABASE_KEY = "sb_publishable_9o7Xw_nHYbbl6065PWzOIg_cSVlbdBY";
+const EVENT_ID = "5acbc9da-85d4-4ba0-a7ac-33cd6d21ed69";
+const FREEZE_AT = new Date("2026-11-09T01:30:00Z"); // 17:30 PT Nov 8
+const supa = (typeof supabase !== "undefined") ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+let liveReady = false;
+let liveEvent = null;
+let myAttendeeId = null;
+let myCardId = null;
+let manualFrozen = false;
+function isLiveFrozen(){
+  if (manualFrozen) return true;
+  if (liveEvent && liveEvent.status === "frozen") return true;
+  const ft = liveEvent && liveEvent.freeze_at ? new Date(liveEvent.freeze_at) : FREEZE_AT;
+  return Date.now() >= ft.getTime();
+}
+function syncFrozen(){
+  const was = frozen;
+  frozen = isLiveFrozen();
+  if (frozen !== was) renderAll();
+  const fb = document.getElementById("freezeBtn");
+  if (fb) fb.textContent = freezeBtnText();
+}
+// Display-only countdown to the 17:30 PT Nov 8 freeze instant.
+// It shows time remaining only. No controls, no Start/Pause/Reset, no timer input.
+// When it reaches zero it shows frozen; freeze enforcement stays in isLiveFrozen/syncFrozen.
+function renderCountdown(){
+  const el = document.getElementById("countdown");
+  if (!el) return;
+  const ft = liveEvent && liveEvent.freeze_at ? new Date(liveEvent.freeze_at) : FREEZE_AT;
+  const ms = ft.getTime() - Date.now();
+  if (ms <= 0) { el.textContent = lang === "zh" ? "已冻结" : "Frozen"; syncFrozen(); return; }
+  const totalSec = Math.floor(ms / 1000);
+  const d = Math.floor(totalSec / 86400);
+  const h = Math.floor((totalSec % 86400) / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  const pad = (n) => String(n).padStart(2, "0");
+  el.textContent = lang === "zh" ? "宾果倒计时：" + (d > 0 ? d + "天 " : "") + pad(h) + "小时 " + pad(m) + "分 " + pad(s) + "秒" : "Time left until freeze: " + (d > 0 ? d + "d " : "") + pad(h) + "h " + pad(m) + "m " + pad(s) + "s";
+}
+setInterval(renderCountdown, 1000);
+async function loadLive(){
+  if (!supa) return;
+  try {
+    const ev = await supa.from("events").select("*").eq("id", EVENT_ID).single();
+    if (!ev.error && ev.data) liveEvent = ev.data;
+    const at = await supa.from("attendees").select("*").eq("event_id", EVENT_ID);
+    if (!at.error) guests = (at.data || []).map(a => ({num: a.guest_number, name: a.display_name, mbti: a.mbti || "", tags: a.interests || [], _id: a.id}));
+    const cd = await supa.from("bingo_cards").select("*").eq("event_id", EVENT_ID);
+    let cards = (!cd.error && cd.data) ? cd.data : [];
+    // Find my card for current theme, if I have an attendee row
+    let myCard = null;
+    if (myAttendeeId) myCard = cards.find(c => c.attendee_id === myAttendeeId && c.theme === theme) || null;
+    if (myCard) {
+      myCardId = myCard.id; card = myCard.cells || [];
+      const fl = await supa.from("fills").select("*").eq("card_id", myCard.id);
+      fills = {};
+      if (!fl.error) (fl.data || []).forEach(f => { fills[f.cell_index] = guests.find(g => g._id === f.filled_attendee_id)?.num; });
+    } else {
+      // No live card yet for this theme: keep locally generated card until profile is saved
+      if (!card.length) generateCard();
+    }
+    // Store all live cards for board scoring
+    window.__liveCards = cards;
+    // Fetch fills for all cards for scoring
+    const allFills = {};
+    if (cards.length) {
+      const ids = cards.map(c => c.id);
+      const fl = await supa.from("fills").select("*").in("card_id", ids);
+      if (!fl.error) (fl.data || []).forEach(f => { (allFills[f.card_id] = allFills[f.card_id] || []).push(f); });
+    }
+    window.__liveFills = allFills;
+    liveReady = true;
+    syncFrozen(); renderAll();
+  } catch (e) { console.warn("live load failed", e); }
+}
+function subscribeLive(){
+  if (!supa) return;
+  const ch = supa.channel("bingo-live-" + EVENT_ID);
+  ch.on("postgres_changes", {event: "*", schema: "public", table: "attendees", filter: "event_id=eq." + EVENT_ID}, () => loadLive());
+  ch.on("postgres_changes", {event: "*", schema: "public", table: "events", filter: "id=eq." + EVENT_ID}, () => loadLive());
+  ch.on("postgres_changes", {event: "*", schema: "public", table: "bingo_cards"}, () => loadLive());
+  ch.on("postgres_changes", {event: "*", schema: "public", table: "fills"}, () => loadLive());
+  ch.subscribe((status) => { if (status === "SUBSCRIBED") loadLive(); });
+  // Hard-freeze: a one-shot timeout to the freeze instant, not polling.
+  const ms = FREEZE_AT.getTime() - Date.now();
+  if (ms > 0) setTimeout(syncFrozen, ms);
+}
+const THEMES = [
+  {id:"seattle", name:"Seattle Life", nameZh:"西雅图生活", sub:"Ski, bouldering & city days", subZh:"滑雪、抱石与城市日常", desc:"Ski slopes, bouldering gyms, stand-up nights, and rainy-day Seattle — find the Seattle in each other.", descZh:"滑雪场、抱石馆、脱口秀之夜和雨天的西雅图——在彼此身上找到西雅图。"},
+  {id:"food", name:"Food & Hangouts", nameZh:"美食与聚会", sub:"Hot pot, boba & KTV nights", subZh:"火锅、奶茶与KTV之夜", desc:"The table, the tea, and the sing-along — find someone to eat, drink, and hang out with.", descZh:"一张桌子、一杯茶、一场合唱——找到一起吃饭、喝茶、玩乐的人。"},
+  {id:"mbti", name:"MBTI", nameZh:"MBTI", sub:"E/I, S/N, T/F, J/P", subZh:"E/I、S/N、T/F、J/P", desc:"Not a test, a conversation starter. Find an E who recharges with people, an I who recharges alone, a J with a plan, a P who goes with the flow.", descZh:"不是测试，是聊天的开场。找到一个从人群中充电的E，一个独处充电的I，一个有计划的J，一个随性的P。"},
+  {id:"stories", name:"Life Stories", nameZh:"人生故事", sub:"Moves, pets & first times", subZh:"搬家、宠物与第一次", desc:"The stories behind the name tag — who just moved here, who has a pet, who is here for the first time.", descZh:"名牌背后的故事——谁刚搬来这里，谁有宠物，谁是第一次参加。"}
+];
+const TRAITS = {
+  seattle:{ ski:{en:"Skis",zh:"滑雪"}, bouldering:{en:"Boulders",zh:"抱石"}, tennis:{en:"Plays tennis",zh:"网球"}, hiking:{en:"Hikes",zh:"徒步"}, comedy:{en:"Loves stand-up comedy",zh:"单口喜剧"}, kayaking:{en:"Kayaks",zh:"皮划艇"}, coffee:{en:"Loves coffee crawls",zh:"咖啡"}, farmers:{en:"Loves farmers markets",zh:"农夫市集"}, running:{en:"Runs",zh:"跑步"} },
+  food:{ hotpot:{en:"Loves hot pot",zh:"火锅"}, boba:{en:"Loves boba",zh:"奶茶"}, ktv:{en:"Loves KTV",zh:"KTV"}, dumpling:{en:"Makes dumplings",zh:"饺子"}, spicy:{en:"Loves spicy food",zh:"辣"}, homecooking:{en:"Cooks home dishes",zh:"家常菜"}, tea:{en:"Loves tea",zh:"茶"}, boardgames:{en:"Loves board games",zh:"桌游"}, brunch:{en:"Loves brunch",zh:"早午餐"} },
+  mbti:{ E:{en:"E · gets energy from people",zh:"外向"}, I:{en:"I · recharges alone",zh:"内向"}, S:{en:"S · loves details",zh:"感觉"}, N:{en:"N · loves big ideas",zh:"直觉"}, T:{en:"T · decides by logic",zh:"思考"}, F:{en:"F · decides by feelings",zh:"情感"}, J:{en:"J · loves a plan",zh:"判断"}, P:{en:"P · goes with the flow",zh:"感知"}, changed:{en:"MBTI has changed over time",zh:"MBTI变过"}, skeptic:{en:"Doesn't take MBTI seriously",zh:"不太信MBTI"} },
+  stories:{ pet:{en:"Has a pet",zh:"宠物"}, travel:{en:"Loves travel",zh:"旅行"}, notsde:{en:"Is not an SDE",zh:"不是SDE"}, moved:{en:"Moved to Seattle last year",zh:"去年刚来西雅图"}, languages:{en:"Speaks 3+ languages",zh:"会三种语言"}, marathon:{en:"Has run a marathon",zh:"跑过马拉松"}, instrument:{en:"Plays an instrument",zh:"乐器"}, firsttimer:{en:"First singles event",zh:"第一次参加单身活动"}, rainy:{en:"Loves rainy days",zh:"爱雨天"} }
+};
+const DEMO = [
+  {num:3, name:"Maya", mbti:"ENFP", tags:["bouldering","hiking","comedy","hotpot","boba","pet","travel","firsttimer","rainy","changed","notsde"]},
+  {num:7, name:"Alex", mbti:"INTJ", tags:["ski","tennis","tea","homecooking","languages","boardgames","skeptic","instrument"]},
+  {num:11, name:"Sofia", mbti:"ESFJ", tags:["tennis","kayaking","dumpling","spicy","brunch","pet","moved","notsde"]},
+  {num:14, name:"Daniel", mbti:"ISTP", tags:["ski","bouldering","running","hotpot","tea","marathon","skeptic"]},
+  {num:18, name:"Emma", mbti:"INFP", tags:["hiking","coffee","farmers","boba","homecooking","travel","languages","instrument","changed","notsde"]},
+  {num:22, name:"Noah", mbti:"ESTP", tags:["tennis","comedy","spicy","ktv","boardgames","pet","moved","firsttimer","notsde"]},
+  {num:26, name:"Lily", mbti:"ENFJ", tags:["bouldering","kayaking","dumpling","ktv","brunch","travel","languages","firsttimer","instrument","notsde"]},
+  {num:31, name:"Ryan", mbti:"ISTJ", tags:["ski","hiking","running","hotpot","boba","marathon"]},
+  {num:35, name:"Grace", mbti:"ISFJ", tags:["coffee","farmers","homecooking","tea","brunch","pet","moved","rainy","notsde"]},
+  {num:42, name:"Kevin", mbti:"ENTP", tags:["comedy","tennis","running","spicy","ktv","travel","changed"]},
+  {num:47, name:"Anna", mbti:"INFJ", tags:["hiking","coffee","farmers","dumpling","tea","languages","marathon","rainy","boardgames","notsde"]},
+  {num:55, name:"Jack", mbti:"ESTJ", tags:["ski","bouldering","boba","homecooking","pet","skeptic"]}
+];
+
+// LANGUAGE — single file, EN / 中文 toggle, default Chinese (zh).
+let lang = "zh";
+const I18N = {
+ mainTitle:{zh:"现场宾果游戏",en:"Live Bingo Game"},
+ chooseGameH2:{zh:"选一个游戏",en:"Choose a game"},
+ chooseGameNote:{zh:"换主题 = 换一张新卡片。",en:"Switch theme = a fresh card."},
+ lblNum:{zh:"1. 你的嘉宾号码",en:"1. Your guest number"},
+ lblName:{zh:"2. 你的名字或昵称",en:"2. Your first name or nickname"},
+ lblMbti:{zh:"3. 你的 MBTI 类型",en:"3. Your MBTI type"},
+ lblTraits:{zh:"4. 你想聊什么？随便选",en:"4. What do you want to talk about? Pick anything"},
+ traitsNote:{zh:"至少选 3 个。不用是真的，只是你想聊的话题。",en:"Pick at least 3. It does not have to be true — just topics you want to talk about."},
+ saveBtn:{zh:"保存我的资料并开始我的卡片",en:"Save my profile & start my card"},
+ separateNote:{zh:"号码和名字分开输入。实时榜显示号码 + 名字或昵称；卡片上只填号码，不显示照片和全名。",en:"Enter number and name separately. The board shows number + name or nickname; cards show only the number, no photos or full names."},
+ tabPlay:{zh:"我的卡片",en:"My card"},
+ tabBoard:{zh:"实时榜",en:"Live board"},
+ tabHost:{zh:"主持人",en:"Host"},
+ freezeBanner:{zh:"🏁 棋盘已冻结——不能再填格。最终分数在“实时榜”里。",en:"🏁 Board frozen — no more fills. Final scores are on the Live board tab."},
+ pointsLabel:{zh:"总分",en:"total pts"},
+ filledLabel:{zh:"已填格",en:"squares filled"},
+ linesLabel:{zh:"连线（每条+3）",en:"lines (+3 each)"},
+ cardNote:{zh:"每格 1 分，连线 +3。跟谁聊过，就填谁的号码，同一个号码可以填多格。换主题也能继续玩，总分累计。",en:"1 point per square, +3 per line. Talked to someone? Fill with their number — the same number can fill more than one square. Switch themes and keep playing, your total score carries over."},
+ newCardBtn:{zh:"换一张本主题的新卡片（会清空已填格）",en:"Shuffle a new card in this theme (resets my fills)"},
+ boardManualNote:{zh:"手动冻结仅限主持人，仅用于测试/彩排，在“主持人”标签页里。它不是计时器。",en:"Manual freeze override is host-only, for testing/dry-run only, in the Host tab. It is not a timer."},
+ hostAccessH2:{zh:"主持人权限",en:"Host access"},
+ hostAccessNote:{zh:"这个标签页仅限主持人。输入主持人密码可解锁嘉宾名单导入和手动冻结。嘉宾绝不能看到这个密码。",en:"This tab is host-only. Enter the host code to unlock guest-list import and the manual freeze override. Guests should never see this code."},
+ lblHostCode:{zh:"主持人密码",en:"Host code"},
+ unlockBtn:{zh:"解锁主持人控制",en:"Unlock host controls"},
+ hostSecurityNote:{zh:"输入 Lucy 设定的主持人密码。不要分享给嘉宾，也不要写在海报或嘉宾邮件里。在这个单文件页面里，密码写在页面源码中，所以它只是封闭房间的一个简易门槛，不是服务器级安全——正式版需要真正的主持人登录。",en:"Enter the host code Lucy set. Do not share it with guests, and do not put it on a poster or in a guest email. In this single-file demo the code is in the page source, so this is a practical gate for a closed room, not server-grade security — the live version needs a real host login."},
+ hostFreezeH2:{zh:"主持人：手动冻结",en:"Host: manual freeze override"},
+ hostFreezeNote:{zh:"仅用于测试/彩排的手动操作——它不是计时器。",en:"Manual override for testing/dry-run only — it is not a timer."},
+ lockBtn:{zh:"锁定主持人控制",en:"Lock host controls"},
+ hostGuestH2:{zh:"主持人：导入真实嘉宾名单",en:"Host: load the real guest list"},
+ hostGuestNote:{zh:"每行粘贴一位嘉宾：<b>号码，名字或昵称，MBTI，标签</b><br>示例：12，小美，ENFP，bouldering;hotpot;boba;pet;travel;changed",en:"Paste one guest per line: <b>Number, First name or nickname, MBTI, tags</b><br>Example: 12, Maya, ENFP, bouldering;hotpot;boba;pet;travel;changed"},
+ lblCsv:{zh:"嘉宾名单（CSV）",en:"Guest list (CSV)"},
+ loadCsvBtn:{zh:"导入这份嘉宾名单",en:"Load this guest list"},
+ resetBtn:{zh:"恢复演示嘉宾",en:"Restore demo guests"},
+ searchLabel:{zh:"按号码或名字搜索",en:"Search by number or name"},
+ cancelBtn:{zh:"取消",en:"Cancel"}
+};
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = l;
+  document.title = l === "zh" ? "现场宾果游戏 · Live Bingo Game" : "Live Bingo Game";
+  const zhBtn = document.getElementById("langZh"), enBtn = document.getElementById("langEn");
+  if (zhBtn) zhBtn.classList.toggle("on", l === "zh");
+  if (enBtn) enBtn.classList.toggle("on", l === "en");
+  Object.keys(I18N).forEach(function(id){ const el = document.getElementById(id); if (el) el.innerHTML = I18N[id][l]; });
+  const gn = document.getElementById("guestNum"); if (gn) gn.placeholder = l === "zh" ? "例如：12" : "e.g. 12";
+  const gnm = document.getElementById("guestName"); if (gnm) gnm.placeholder = l === "zh" ? "例如：小美" : "e.g. Maya";
+  const hc = document.getElementById("hostCode"); if (hc) hc.placeholder = l === "zh" ? "输入主持人密码" : "Enter host code";
+  const sr = document.getElementById("search"); if (sr) sr.placeholder = l === "zh" ? "输入号码或名字…" : "Type a number or name…";
+  const mb = document.querySelector('#mbtiSelect option[value=""]'); if (mb) mb.textContent = l === "zh" ? "还不知道" : "I don't know yet";
+  renderThemes(); renderProfileTraits(); renderCountdown(); renderAll();
+}
+function traitMain(tr){ return lang === "zh" ? tr.zh : tr.en; }
+function traitSub(tr){ return lang === "zh" ? tr.en : tr.zh; }
+function freezeBtnText(){ return frozen ? (lang === "zh" ? "取消冻结棋盘" : "Unfreeze board") : (lang === "zh" ? "冻结棋盘" : "Freeze board"); }
+
+let guests = []; // LIVE: loaded from Supabase attendees for EVENT_ID; demo guests are not real attendees
+let player = {num:null, name:"", mbti:"", tags:[]};
+let theme = "mbti";
+let card = [];
+let fills = {};
+let frozen = false;
+let currentCell = null;
+
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuffle(arr, rand){arr=[...arr];for(let i=arr.length-1;i>0;i--){let j=Math.floor(rand()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function hasTrait(g, trait){
+  if(theme==="mbti"){
+    if(trait.length===1) return (g.mbti||"").includes(trait);
+    return g.tags.includes(trait);
+  }
+  return g.tags.includes(trait);
+}
+function traitCounts(){
+  const c={}; Object.keys(TRAITS[theme]).forEach(t=>{ c[t]=guests.filter(g=>hasTrait(g,t)).length; }); return c;
+}
+function generateCard(){
+  // Conversation prompts, not truth: 9 prompts from this theme, shuffled.
+  // No guest-count filter, no need for anyone to actually "have" the trait.
+  const rand = rng(hash(theme+":"+String(player.num)+":"+Date.now()));
+  const all = Object.keys(TRAITS[theme]);
+  card = shuffle(all, rand).slice(0,9);
+  fills = {};
+}
+function display(g){ return "#"+g.num+" · "+g.name; }
+function themeName(){ return THEMES.find(t=>t.id===theme).name; }
+function themeNameZh(){ const t=THEMES.find(t=>t.id===theme); return t.nameZh||t.name; }
+function linesCompleted(){
+  const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  return lines.filter(l=>l.every(i=>fills[i]!==undefined)).length;
+}
+function score(){ const f=Object.keys(fills).length; return f + linesCompleted()*3; }
+function renderThemes(){
+  const html = THEMES.map(t=>`<button class="${t.id===theme?"on":""}" onclick="setTheme('${t.id}')">${lang==="zh"?(t.nameZh||t.name):t.name}<small>${lang==="zh"?(t.subZh||t.sub):t.sub}</small></button>`).join("");
+  document.getElementById("themes").innerHTML = html;
+  document.getElementById("themeDesc").textContent = lang==="zh" ? (THEMES.find(t=>t.id===theme).descZh||THEMES.find(t=>t.id===theme).desc) : THEMES.find(t=>t.id===theme).desc;
+  document.getElementById("boardNote").textContent = lang==="zh" ? "实时榜 · "+themeNameZh()+ "。排行榜只按开启的对话数排名，绝不按受欢迎程度。每一行显示号码 + 名字或昵称，以嘉宾自己选的为准。" : "Live board · "+themeName()+". Leaderboard ranks conversations started, never desirability. Each row shows number + first name or nickname, whatever that guest chose.";
+}
+async function setTheme(id){ theme=id; renderThemes(); if (supa && myAttendeeId) { await loadLive(); const mc=(window.__liveCards||[]).find(c=>c.attendee_id===myAttendeeId && c.theme===theme); if (mc) { myCardId=mc.id; card=mc.cells||[]; } else { generateCard(); } renderAll(); } else { generateCard(); renderAll(); } }
+function cumulativeScore(){
+  const cards = window.__liveCards || [];
+  if (myAttendeeId && cards.length) {
+    const mine = cards.filter(c=>c.attendee_id===myAttendeeId);
+    if (mine.length) return mine.reduce((s,c)=>s+cardScoreFor(c, window.__liveFills||{}), 0);
+  }
+  return score();
+}
+function renderCard(){
+  const grid=document.getElementById("grid"); grid.innerHTML="";
+  card.forEach((t,i)=>{
+    const d=document.createElement("div"); d.className="cell"+(fills[i]!==undefined?" filled":"");
+    const num=fills[i];
+    d.innerHTML = num!==undefined
+      ? `<div class="num">#${num}</div><small>${traitMain(TRAITS[theme][t])} · ${lang==="zh"?"点一下撤销":"tap to undo"}</small>`
+      : `<div class="trait">${traitMain(TRAITS[theme][t])}</div><div class="zh">${traitSub(TRAITS[theme][t])}</div><small>${lang==="zh"?"点一下找号码":"tap to find a number"}</small>`;
+    d.onclick=async ()=>{ syncFrozen(); if(frozen) return; if(fills[i]!==undefined){ if (supa && myCardId) { await supa.from("fills").delete().eq("card_id", myCardId).eq("cell_index", i); await loadLive(); } else { delete fills[i]; renderAll(); } } else { currentCell=i; openModal(); } };
+    grid.appendChild(d);
+  });
+  document.getElementById("score").textContent=cumulativeScore();
+  document.getElementById("filled").textContent=Object.keys(fills).length+" / 9";
+  document.getElementById("lines").textContent=linesCompleted();
+  document.getElementById("freezeBanner").classList.toggle("hidden", !frozen);
+}
+function cardScoreFor(cardRow, fillsByCard){
+  const fl = fillsByCard[cardRow.id] || [];
+  const filledIdx = new Set(fl.map(f => f.cell_index));
+  const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  const linesDone = lines.filter(l=>l.every(i=>filledIdx.has(i))).length;
+  return fl.length + linesDone*3;
+}
+function renderBoard(){
+  const cards = window.__liveCards || [];
+  const fillsByCard = window.__liveFills || {};
+  let rows = guests.map(g=>{
+    const myCards = cards.filter(c=>c.attendee_id===g._id);
+    const pts = myCards.reduce((s,c)=>s+cardScoreFor(c, fillsByCard), 0);
+    const me = (myAttendeeId && g._id===myAttendeeId) || (player.num && g.num===player.num);
+    return {g, pts, me};
+  });
+  rows.sort((a,b)=>b.pts-a.pts);
+  document.getElementById("board").innerHTML = rows.length ? rows.map((r,i)=>`
+    <div class="boardrow"><div class="rank ${i===0?"top":""}">${i+1}</div>
+    <div style="flex:1">${display(r.g)}${r.me?(lang==="zh"?" （你）":" (you)"):""}</div>
+    <b>${r.pts} ${lang==="zh"?"分":"pts"}</b></div>`).join("") : `<p class="note">${lang==="zh"?"还没有嘉宾。在上面保存你的资料，加入实时榜。":"No guests yet. Save your profile above to join the live board."}</p>`;
+  const fb=document.getElementById("freezeBtn"); if(fb) fb.textContent = freezeBtnText();
+}
+function renderAll(){ renderCard(); renderBoard(); }
+function showTab(t){
+  ["play","board","host"].forEach(k=>{
+    document.getElementById("view"+k[0].toUpperCase()+k.slice(1)).classList.toggle("hidden", k!==t);
+    document.getElementById("tab"+k[0].toUpperCase()+k.slice(1)).classList.toggle("on", k===t);
+  });
+}
+function openModal(){
+  const t=card[currentCell];
+  document.getElementById("modalTitle").textContent = lang==="zh" ? "跟谁聊了「"+TRAITS[theme][t].zh+"」？" : "Who did you talk about \u201c"+TRAITS[theme][t].en+"\u201d with?";
+  document.getElementById("search").value=""; renderPeople();
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+function renderPeople(){
+  const q=(document.getElementById("search").value||"").toLowerCase();
+  // Any guest counts: you talked to them, you pick their number.
+  // No trait match, no "already used" block, same number can fill more than one square.
+  const list=guests.filter(g=>g.num!==player.num && (String(g.num).includes(q) || g.name.toLowerCase().includes(q)));
+  document.getElementById("people").innerHTML = list.length ? list.map(g=>`
+    <button class="person" onclick="pickPerson(${g.num})">
+      <span class="num">#${g.num}</span>
+      <span style="flex:1"><b>${display(g)}</b><br><span style="font-size:13px;color:#666">${lang==="zh"?"跟 TA 聊过这个话题，就可以填 #"+g.num:"Talked about this with them? Tap to fill with #"+g.num}</span></span>
+    </button>`).join("")
+    : `<p class="note">${lang==="zh"?"还没有其他嘉宾。先让对方在上面保存资料，加入实时榜。":"No other guests yet. Ask them to save their profile above to join the live board."}</p>`;
+}
+async function pickPerson(num){
+  if (frozen) return;
+  const guest = guests.find(g=>g.num===num);
+  if (!guest || !guest._id) { alert(lang==="zh"?"这位嘉宾还没有加入现场房间。":"That guest is not in the live room yet."); return; }
+  if (supa && myCardId) {
+    syncFrozen(); if (frozen) { renderAll(); return; }
+    const { error } = await supa.from("fills").insert({card_id: myCardId, cell_index: currentCell, filled_attendee_id: guest._id});
+    if (error) { alert(lang==="zh"?"填不上这一格（可能已经填过，或这个号码已经在你的卡片上了）。":"Could not fill that square (it may already be filled, or that number is already on your card)."); return; }
+    closeModal(); await loadLive();
+  } else { fills[currentCell]=num; closeModal(); renderAll(); }
+}
+async function newCard(){
+  syncFrozen(); if(frozen) return;
+  generateCard();
+  if (supa && myCardId) {
+    await supa.from("fills").delete().eq("card_id", myCardId);
+    await supa.from("bingo_cards").update({cells: card}).eq("id", myCardId);
+    await loadLive();
+  } else renderAll();
+}
+async function toggleFreeze(){
+  manualFrozen = !manualFrozen;
+  if (supa) { await supa.from("events").update({status: manualFrozen ? "frozen" : "live"}).eq("id", EVENT_ID); }
+  syncFrozen();
+}
+// HOST GATE — change this before Nov 8, and never share it with guests.
+// In this single-file demo the code is in the page source, so this gates the
+// Host tab for a closed room; it is NOT server-grade security. The live
+// version needs a real host login (Supabase Auth) instead of a PIN in code.
+const HOST_CODE = "0511";
+let hostLocked = true;
+function renderHost(){
+  const lock=document.getElementById("hostLock"); const controls=document.getElementById("hostControls");
+  if(lock) lock.classList.toggle("hidden", !hostLocked);
+  if(controls) controls.classList.toggle("hidden", hostLocked);
+}
+function unlockHost(){
+  const code=(document.getElementById("hostCode").value||"").trim();
+  if(code===HOST_CODE){ hostLocked=false; renderHost(); }
+  else alert(lang==="zh"?"主持人密码不对。":"Wrong host code.");
+}
+function lockHost(){ hostLocked=true; const el=document.getElementById("hostCode"); if(el) el.value=""; renderHost(); }
+// Display-only countdown, no timer controls. Bingo starts at opening (15:30 PT, Nov 8), the
+// leaderboard is live, and it freezes hard at 17:30 PT on Nov 8
+// (2026-11-09 01:30:00 UTC). The Host tab keeps only a manual
+// Freeze/Unfreeze toggle for testing/dry-run, not a timer.
+function renderProfileTraits(){
+  const container=document.getElementById("profileTraits"); if(!container) return;
+  const groups=[["seattle",lang==="zh"?"西雅图生活":"Seattle Life"],["food",lang==="zh"?"美食与聚会":"Food & Hangouts"],["mbti",lang==="zh"?"MBTI补充":"MBTI extras"],["stories",lang==="zh"?"人生故事":"Life Stories"]];
+  container.innerHTML = groups.map(([tid, label])=>{
+    const keys=Object.keys(TRAITS[tid]).filter(k=>!(tid==="mbti" && k.length===1));
+    const checks=keys.map(k=>`<label><input type="checkbox" data-trait="${k}"> ${lang==="zh"?TRAITS[tid][k].zh:TRAITS[tid][k].en}</label>`).join("");
+    return `<div class="traitgroup"><b>${label}</b><div class="traitcheck">${checks}</div></div>`;
+  }).join("");
+}
+function readProfileTraits(){
+  return Array.from(document.querySelectorAll('#profileTraits input[type="checkbox"]:checked')).map(el=>el.getAttribute("data-trait"));
+}
+function setProfileTraits(tags){
+  document.querySelectorAll('#profileTraits input[type="checkbox"]').forEach(el=>{
+    el.checked = tags.includes(el.getAttribute("data-trait"));
+  });
+}
+async function startPlayer(){
+  const num=Number(document.getElementById("guestNum").value);
+  const name=(document.getElementById("guestName").value||"").trim();
+  const mbti=(document.getElementById("mbtiSelect").value||"").toUpperCase();
+  const tags=[]; // No upfront trait selection: bingo is for conversation, not accuracy.
+  if(!num || !name){ alert(lang==="zh"?"请同时输入嘉宾号码和名字或昵称。":"Enter both: a guest number and a first name or nickname."); return; }
+  syncFrozen(); if (frozen) { alert(lang==="zh"?"棋盘已冻结——不能再填格或换新卡片。":"The board is frozen — no more fills or new cards."); return; }
+  player={num, name, mbti, tags};
+  if (supa) {
+    const existing = await supa.from("attendees").select("*").eq("event_id", EVENT_ID).eq("guest_number", num).single();
+    let att = existing.data;
+    if (att) {
+      const upd = await supa.from("attendees").update({display_name: name, mbti: mbti, interests: tags}).eq("id", att.id).select().single();
+      if (!upd.error) att = upd.data;
+    } else {
+      const ins = await supa.from("attendees").insert({event_id: EVENT_ID, guest_number: num, display_name: name, mbti: mbti, interests: tags}).select().single();
+      if (ins.error) { alert((lang==="zh"?"保存资料失败：":"Could not save your profile: ") + ins.error.message); return; }
+      att = ins.data;
+    }
+    myAttendeeId = att.id;
+    await loadLive();
+    const myCards = (window.__liveCards || []).filter(c=>c.attendee_id===myAttendeeId && c.theme===theme);
+    if (!myCards.length) {
+      generateCard();
+      const ins = await supa.from("bingo_cards").insert({event_id: EVENT_ID, attendee_id: myAttendeeId, cells: card, theme: theme}).select().single();
+      if (!ins.error) myCardId = ins.data.id;
+    } else { myCardId = myCards[0].id; card = myCards[0].cells || card; }
+    await loadLive();
+  } else {
+    const existing=guests.find(g=>g.num===num);
+    if(existing){ existing.name=name; existing.mbti=mbti; existing.tags=tags; }
+    else guests.push({num, name, mbti, tags});
+    generateCard();
+  }
+  document.getElementById("youAre").innerHTML = lang==="zh" ? "你是 <b>"+display(player)+"</b>"+(mbti?" ("+mbti+")":"")+"。改上面的信息并点“保存我的资料”可以切换。" : "You are <b>"+display(player)+"</b>"+(mbti?" ("+mbti+")":"")+". Change the fields above and tap Save my profile to switch.";
+  renderAll();
+}
+function fillDemo(){ /* LIVE: demo guests are not used. Save your own profile instead. */ }
+async function loadCsv(){
+  const lines=document.getElementById("csv").value.trim().split("\n").filter(Boolean);
+  const parsed=lines.map(l=>{ const parts=l.split(",").map(x=>(x||"").trim());
+    const [num, name, mbti, ints]=parts;
+    return {num:Number(num), name, mbti:(mbti||"").toUpperCase(), tags:(ints||"").split(";").map(x=>x.trim()).filter(Boolean)}; }).filter(g=>g.num && g.name);
+  if(!parsed.length){ alert(lang==="zh"?"没有找到有效的嘉宾。请用这个格式：12，小美，ENFP，bouldering;hotpot;boba":"No valid guests found. Use: 12, Maya, ENFP, bouldering;hotpot;boba"); return; }
+  if (supa) {
+    for (const g of parsed) {
+      const ex = await supa.from("attendees").select("id").eq("event_id", EVENT_ID).eq("guest_number", g.num).single();
+      if (ex.data) await supa.from("attendees").update({display_name: g.name, mbti: g.mbti, interests: g.tags}).eq("id", ex.data.id);
+      else await supa.from("attendees").insert({event_id: EVENT_ID, guest_number: g.num, display_name: g.name, mbti: g.mbti, interests: g.tags});
+    }
+    await loadLive();
+  } else { guests=parsed; generateCard(); }
+  renderAll(); showTab("play");
+}
+async function resetDemo(){ if (supa) await loadLive(); else { guests=[]; generateCard(); } renderAll(); }
+renderHost(); setLang("zh"); if (supa) { subscribeLive(); loadLive(); } else { generateCard(); renderAll(); }
+</script>
+</body>
+</html>
